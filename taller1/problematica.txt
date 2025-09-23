@@ -1,0 +1,49 @@
+Taller 1
+Implementación del problema
+En la "Librería Cervantes” se requiere un sistema de registro de compras debe registrar los datos de un cliente (su edad, la cantidad de libros que desea comprar o si desea solo préstamo y su plan de membresía) para proporcionar una compra más detallada.
+El flujo de trabajo se inicia con la verificación de la edad del cliente. Si la edad es menor a 12 años, solo se le permite comprar libros infantiles, mientras que, a partir de los 12 años, puede adquirir cualquier tipo de libro. El sistema debe emitir un mensaje de confirmación o restricción según sea el caso también con la verificación si desea comprar el libro o solo desea el préstamo.
+También se calcula el tiempo de préstamos de libros estimado en la semana. Sabiendo que cada libro tiene un promedio de 5 días de lectura, el programa debe iterar a través de la cantidad de libros comprados para sumar el tiempo total.
+el programa también debe considerar el plan de lector elegido por el cliente para aplicar los beneficios y calcular el total a pagar. Si el cliente elige el plan BÁSICO, no se aplica ningún descuento. Para el plan PREMIUM, se aplica un 10% de descuento en la compra total. Y si el plan es VIP, el cliente recibe un 20% de descuento, además del beneficio de acceder a un club de lectura.
+
+Finalmente, el sistema genera un resumen de la compra para el cliente. Este resumen incluye el mensaje de edad con (permiso o restricción), el total de días de lectura estimados, los beneficios correspondientes al plan elegido y, lo más importante, el total final a pagar, ya con el descuento aplicado si corresponde.
+
+Desglosamiento del problema
+Entrada de datos:
+Edad del cliente:  input -> number
+Cantidad de libros: input -> number
+Plan de membresia: input-> string
+Costo por libro: input-> number
+Tipo de transacción → string (COMPRA o PRÉSTAMO)
+
+
+Salida de datos (outputs):
+Mensaje de edad: a que categoría de libro puede comprar
+Tipo de transacción elegida (COMPRA o PRÉSTAMO).
+Total de días de lectura (si es préstamo).
+Tiempo adicional en dias(si es préstamo).
+Beneficios del plan elegido.
+Total final a pagar (si es compra).
+
+Reglas en términos de control de flujo:
+Condicionales if/else:
+Si edad < 12 → Solo puedes comprar libros infantiles
+Si edad >= 12 → Puedes comprar cualquier tipo de libro
+Genera mensaje de confirmación o restricción
+transacción (if/else):
+Si tipoTransaccion == "COMPRA" → Ejecuta flujo de compra.
+Si tipoTransaccion == "PRÉSTAMO" → Ejecuta flujo de préstamo.
+Caso contrario → "Transacción no válida".
+
+Bucle (for / while):
+En COMPRA → Iterar libros para calcular total de días de lectura:
+5 días × cantidadLibros.
+En PRÉSTAMO → Iterar libros para calcular tiempo de préstamo:
+60 minutos × cantidadLibros.
+
+
+Selección múltiple (switch):
+Aplicar beneficios del plan:
+BÁSICO → Sin beneficios adicionales
+PREMIUM → 10% de descuento en compras
+VIP → 20% de descuento en compras + Acceso al club de lectura
+Otro → Plan no válido
