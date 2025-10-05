@@ -1,0 +1,27 @@
+//Crear préstamo personal
+POST http://localhost:3000/loans
+Content-Type: application/json
+
+{
+  "name": "erika pesca",
+  "amount": 5000000,
+  "type": "personal",
+  "termMonths": 12
+}
+
+//Crear préstamo hipotecario
+POST http://localhost:3000/loans
+Content-Type: application/json
+
+{
+  "name": "adriana",
+  "amount": 20000000,
+  "type": "hipotecario",
+  "termMonths": 60
+}
+
+//Listar todos los préstamos
+GET http://localhost:3000/loans
+
+//Consultar préstamo por ID
+GET http://localhost:3000/loans/1

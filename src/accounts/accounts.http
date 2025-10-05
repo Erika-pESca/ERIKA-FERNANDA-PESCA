@@ -1,0 +1,24 @@
+//Crear nueva cuenta
+POST http://localhost:3000/accounts
+Content-Type: application/json
+
+{
+  "name": "Cuenta Ahorros",
+  "clientId": 1,
+  "balance": 1500,
+  "type": "ahorros"
+}
+
+// Listar todas las cuentas
+GET http://localhost:3000/accounts
+Content-Type: application/json
+
+
+// Buscar cuenta por ID
+GET http://localhost:3000/accounts/1
+Content-Type: application/json
+
+
+//Eliminar cuenta
+DELETE http://localhost:3000/accounts/1
+Content-Type: application/json
