@@ -1,0 +1,80 @@
+Implementación del problema
+
+En el “Banco Digital adrierik” se requiere un sistema de gestión bancaria que permita registrar y controlar
+clientes, cuentas, transacciones y préstamos. El objetivo es brindar un servicio completo que permita a los
+clientes crear cuentas, depositar y retirar dinero, realizar transferencias entre cuentas, y solicitar préstamos
+de distintos tipos.
+El flujo del sistema comienza con la gestión de clientes, donde se registran los datos personales y el tipo de cliente
+(Regular, Premium, VIP) para determinar los beneficios y restricciones en sus operaciones bancarias.
+Una vez registrado, el cliente puede crear una o varias cuentas en el banco. Cada cuenta tiene un tipo (Ahorros o Corriente) 
+y un saldo inicial. Las operaciones financieras (depósitos, retiros y transferencias) afectan directamente el saldo de estas 
+cuentas y deben validarse para garantizar que no se realicen transacciones con fondos insuficientes.
+El sistema también permite a los clientes solicitar préstamos, los cuales pueden ser personales, hipotecarios o vehiculares.
+Cada préstamo tiene un estado (pendiente, aprobado, pagado o rechazado). El sistema debe
+controlar que los datos ingresados sean válidos.
+Finalmente, el sistema genera reportes de todas las operaciones: saldos actuales transacciones realizadas y préstamos
+solicitados, para que el cliente tenga visibilidad completa de su actividad financiera.
+
+Desglosamiento del problema
+Entidades necesarias:
+
+Clientes (Client)
+
+Propiedades: nombre, email, edad, tipo de cliente (Regular, Premium, VIP), teléfono.
+
+Operaciones:
+
+Crear un cliente nuevo.
+
+Actualizar información completa o parcial del cliente.
+
+Eliminar un cliente.
+
+Consultar cliente por ID o listar todos los clientes.
+
+
+Cuentas (Account)
+
+Propiedades: nombre de la cuenta, tipo (Ahorros o Corriente), saldo, cliente propietario.
+
+Operaciones:
+
+Crear una cuenta vinculada a un cliente.
+
+Consultar saldo.
+
+Listar todas las cuentas.
+
+Eliminar una cuenta.
+
+Transacciones (Transaction)
+
+Propiedades: tipo (Depósito, Retiro, Transferencia), monto, cuenta origen, cuenta destino (opcional), 
+banco destino (solo para transferencias), fecha.
+
+Operaciones:
+
+Realizar depósito: aumenta el saldo de la cuenta.
+
+Realizar retiro: disminuye el saldo si hay fondos suficientes.
+
+Realizar transferencia: disminuye el saldo de la cuenta origen y registra el destino, validando fondos y banco.
+
+Consultar todas las transacciones.
+
+Consultar transacción por ID.
+
+Consultar saldo actual de la cuenta.
+
+
+Préstamos (Loan)
+
+Propiedades: nombre del solicitante, monto, tipo (Personal, Hipotecario, Vehicular), plazo en meses, estado (Pendiente, Aprobado, Pagado, Rechazado), fecha.
+
+Operaciones:
+
+Solicitar un préstamo nuevo.
+
+Consultar todos los préstamos.
+
+Consultar préstamo por ID.

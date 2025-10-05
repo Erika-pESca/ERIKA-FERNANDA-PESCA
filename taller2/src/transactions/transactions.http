@@ -1,0 +1,36 @@
+//DEPOSITAR DINERO
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+  "type": "deposito",
+  "amount": 20000,
+  "sourceAccountId": 1
+}
+
+//HACER UN RETIRO
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+  "type": "retiro",
+  "amount": 100,
+  "sourceAccountId": 105796542
+}
+
+//HACER UNA TRANSFERENCIA
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+  "type": "transferencia",
+  "amount": 300,
+  "sourceAccountId": 105796542,
+  "destinationAccountId": 32254554,
+  "bank": "Bancolombia"
+}
+
+//CONSULTAR SALDO
+GET http://localhost:3000/transactions/saldo
+
+

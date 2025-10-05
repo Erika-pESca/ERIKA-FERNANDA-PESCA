@@ -1,0 +1,50 @@
+//Listar todos los clientes
+GET http://localhost:3000/clients
+Content-Type: application/json
+
+
+// Crear un nuevo cliente
+POST http://localhost:3000/clients
+Content-Type: application/json
+
+{
+  "name": "ERika Pesca",
+  "email": "erika.pesca@example.com",
+  "age": 19,
+  "type": "regular",
+  "telefono": "3112979580"
+}
+
+
+// Obtener cliente por ID busca su cliente por el id 
+GET http://localhost:3000/clients/1
+Content-Type: application/json
+
+
+// Actualizar completamente un cliente (PUT) si quieres cambiar un cliente por otro
+PUT http://localhost:3000/clients/1
+Content-Type: application/json
+
+{
+  "name": "adriana",
+  "email": "adriana@gmail.com",
+  "age": 33,
+  "type": "premium",
+  "telefono": "3216549870"
+}
+
+
+// Actualizar parcialmente un cliente (PATCH) cuando solo quieres cambiar unos datos especificos de un cliente
+PATCH http://localhost:3000/clients/1
+Content-Type: application/json
+
+{
+  "telefono": "3109998888",
+  "type": "vip"
+}
+
+
+
+// Eliminar un cliente (DELETE) elimina los clientes creados 
+DELETE http://localhost:3000/clients/1
+Content-Type: application/json
