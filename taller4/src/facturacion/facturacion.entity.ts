@@ -1,4 +1,3 @@
-// facturacion.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,

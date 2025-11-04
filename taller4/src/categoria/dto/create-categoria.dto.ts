@@ -1,19 +1,23 @@
-// Importamos decoradores del paquete class-validator
-// Estos se usan para validar los datos que se reciben en las peticiones (por ejemplo, desde el frontend)
 import { IsString, IsOptional, Length } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-// Definimos un DTO (Data Transfer Object) para crear una categoría
-// Sirve para controlar y validar qué datos se pueden enviar al backend
 export class CreateCategoriaDto {
 
-  // Campo obligatorio: nombre de la categoría
-  // Debe ser una cadena (texto) con mínimo 2 y máximo 100 caracteres
+  @ApiProperty({
+    description: 'Nombre de la categoría',
+    example: 'Categoría A',
+    minLength: 2,
+    maxLength: 100,
+  })
   @IsString()
   @Length(2, 100)
   nombre!: string;
 
-  // Campo opcional: descripción de la categoría
-  // Si se envía, debe ser texto (string)
+  @ApiProperty({
+    description: 'Descripción opcional de la categoría',
+    example: 'Categoría de productos electrónicos',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   descripcion?: string;

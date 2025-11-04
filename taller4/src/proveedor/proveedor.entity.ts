@@ -1,21 +1,27 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
 import { Producto } from '../producto/producto.entity';
 import * as crypto from 'crypto';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Proveedor {
+  @ApiProperty({ example: 1, description: 'Identificador único del proveedor' })
   @PrimaryGeneratedColumn()
   id_proveedor!: number;
 
+  @ApiProperty({ example: 'Distribuciones La Española', description: 'Nombre del proveedor' })
   @Column()
   nombre: string;
 
+  @ApiProperty({ example: '3004567890', description: 'Teléfono de contacto del proveedor' })
   @Column()
   telefono: string;
 
+  @ApiProperty({ example: 'proveedor@gmail.com', description: 'Correo electrónico encriptado del proveedor' })
   @Column()
   correo: string;
 
+  @ApiProperty({ type: () => [Producto], description: 'Lista de productos asociados al proveedor' })
   @OneToMany(() => Producto, (producto) => producto.proveedor)
   productos: Producto[];
 

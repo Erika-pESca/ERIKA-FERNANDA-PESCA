@@ -1,66 +1,71 @@
-// Importamos decoradores y clases necesarias de NestJS y TypeORM
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
-// Importamos la entidad y los DTOs (objetos para recibir datos)
 import { Categoria } from './categoria.entity';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
-//Este decorador indica que esta clase puede ser inyectada como un servicio
+/**
+ * Servicio que gestiona las operaciones CRUD para las categorías de productos.
+ * 
+ * Implementa la lógica necesaria para crear, consultar, actualizar y eliminar categorías
+ * en la base de datos, utilizando el repositorio de TypeORM.
+ */
 @Injectable()
 export class CategoriaService {
-  // Se inyecta el repositorio de la entidad Categoria para interactuar con la base de datos
   constructor(
     @InjectRepository(Categoria)
     private readonly repo: Repository<Categoria>,
   ) {}
 
-  // Crear una nueva categoría
+  /**
+   * Crea una nueva categoría en la base de datos.
+   * @param dto - Datos de la categoría a crear.
+   * @returns La categoría creada.
+   */
   create(dto: CreateCategoriaDto) {
-    // Crea una nueva instancia de categoría usando los datos del DTO
     const entity = this.repo.create(dto);
-    // Guarda la categoría en la base de datos
     return this.repo.save(entity);
   }
 
-  // Obtener todas las categorías registradas
+  /**
+   * Obtiene todas las categorías registradas.
+   * @returns Lista completa de categorías.
+   */
   findAll() {
-    // Devuelve un arreglo con todas las categorías encontradas
     return this.repo.find();
   }
 
-  // Buscar una categoría específica por su ID
+  /**
+   * Busca una categoría específica por su ID.
+   * @param id - Identificador de la categoría.
+   * @returns La categoría encontrada o lanza un error si no existe.
+   */
   async findOne(id: number) {
-    // Busca la categoría por su id_categoria
     const cat = await this.repo.findOne({ where: { id_categoria: id } });
-
-    // Si no existe, lanza  error 404 (no encontrada)
     if (!cat) throw new NotFoundException('Categoría no encontrada');
-
-    // Si se encuentra, la devuelve
     return cat;
   }
 
-  // Actualizar una categoría existente
+  /**
+   * Actualiza los datos de una categoría existente.
+   * @param id - ID de la categoría a actualizar.
+   * @param dto - Nuevos valores para la categoría.
+   * @returns La categoría actualizada.
+   */
   async update(id: number, dto: UpdateCategoriaDto) {
-    // Verifica que la categoría exista antes de actualizarla
     const cat = await this.findOne(id);
-
-    // Mezcla los nuevos datos (dto) con los datos existentes
     this.repo.merge(cat, dto);
-
-    // Guarda los cambios en la base de datos
     return this.repo.save(cat);
   }
 
-  // Eliminar una categoría por su ID
+  /**
+   * Elimina una categoría de la base de datos.
+   * @param id - ID de la categoría a eliminar.
+   * @returns Confirmación de eliminación.
+   */
   async remove(id: number) {
-    // Verifica que la categoría exista antes de eliminarla
     const cat = await this.findOne(id);
-
-    // Elimina la categoría de la base de datos
     return this.repo.remove(cat);
   }
 }
