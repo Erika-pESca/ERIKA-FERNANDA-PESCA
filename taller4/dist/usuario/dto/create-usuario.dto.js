@@ -12,14 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUsuarioDto = void 0;
 const class_validator_1 = require("class-validator");
 const roles_enum_1 = require("../enums/roles.enum");
+const swagger_1 = require("@nestjs/swagger");
 class CreateUsuarioDto {
     nombre;
+    apellido;
     correo;
     contrasena;
     rol;
 }
 exports.CreateUsuarioDto = CreateUsuarioDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'nombre',
+        required: true,
+        type: String,
+        description: 'Nombre del usuario',
+        example: 'Erika',
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.MaxLength)(100),
@@ -27,6 +36,27 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "nombre", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'apellido',
+        required: true,
+        type: String,
+        description: 'Apellido del usuario',
+        example: 'Pesca',
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(3),
+    (0, class_validator_1.MaxLength)(100),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateUsuarioDto.prototype, "apellido", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'correo',
+        required: true,
+        type: String,
+        description: 'Correo del usuario',
+        example: 'erika@gmail.com',
+    }),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.MinLength)(5),
     (0, class_validator_1.MaxLength)(100),
@@ -34,6 +64,13 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "correo", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'contrasena',
+        required: true,
+        type: String,
+        description: 'Contraseña del usuario',
+        example: '123456',
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(8),
     (0, class_validator_1.MaxLength)(100),
@@ -41,6 +78,13 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "contrasena", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'rol',
+        required: true,
+        enum: String,
+        description: 'Rol del usuario',
+        example: 'Administrador',
+    }),
     (0, class_validator_1.IsEnum)(roles_enum_1.Roles),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)

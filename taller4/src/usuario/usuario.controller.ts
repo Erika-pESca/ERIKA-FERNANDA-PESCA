@@ -1,24 +1,45 @@
-import {Body,Controller,Delete,Get,Param,ParseIntPipe,Patch,Post,NotFoundException,} from '@nestjs/common';
+import {Body,Controller,Delete,Get,Param,ParseIntPipe,Patch,Post,NotFoundException, HttpStatus} from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { ApiOperation, ApiParam, ApiBody  } from '@nestjs/swagger';
+import { DefaultErrorsDoc } from 'src/common/decorators/defaultErrorsDoc';
 
 @Controller('usuario') //definimos la ruta base para este controlador
 export class UsuarioController {
   constructor(private readonly userService: UsuarioService) {}
 
+  @ApiOperation({
+    summary: 'Crear un usuario',
+    description: 'Crea un nuevo usuario en la base de datos',
+  })
+@DefaultErrorsDoc()
   // Crear usuario
   @Post('register')
   createUser(@Body() body: CreateUsuarioDto) {
     return this.userService.createUser(body);
   }
 
+  @ApiOperation({
+    summary: 'Lista los usuarios creados',
+    description: 'nos lista todos los usuarios creados en la base de datos y guardados corectamente',
+  })
   // Listar usuarios
   @Get('list')
   listUsers() {
     return this.userService.listUsers();
   }
 
+  @ApiOperation({
+    summary: 'Obtener usuario por un ID',
+    description: 'nos devuelve un usuario en especifico',
+  })
+@ApiParam({
+    name: 'id',
+    description: 'Identificador numérico del usuario',
+    type: Number,
+    example: 1,
+  })
   // Obtener usuario por ID
   @Get(':id')
   async getUser(@Param('id', ParseIntPipe) id: number) {
@@ -28,6 +49,21 @@ export class UsuarioController {
     return user;
   }
 
+
+  @ApiOperation({
+    summary: 'Actualizar usuario',
+    description: 'actualiza un usuario en la base de datos en los campos que queremos que se actualicen',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Identificador numérico del usuario a actualizar',
+    type: Number,
+    example: 2,
+  })
+  @ApiBody({
+    description: 'Campos que pueden actualizarse del usuario',
+    type: UpdateUsuarioDto,
+  })
   // Actualizar usuario
   @Patch(':id')
   async updateUser(
@@ -40,6 +76,18 @@ export class UsuarioController {
     return updated;
   }
 
+
+  @ApiOperation({
+    summary: 'Eliminar usuario',
+    description: 'elimina un usuario en la base de datos con su respectivo ID',
+  })
+  
+  @ApiParam({
+    name: 'id',
+    description: 'Identificador del usuario a eliminar',
+    type: Number,
+    example: 3,
+  })
   // Eliminar usuario
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number) {
