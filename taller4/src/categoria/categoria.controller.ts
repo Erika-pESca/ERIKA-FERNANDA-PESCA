@@ -1,60 +1,83 @@
-// Importamos los decoradores y utilidades necesarios de NestJS
 import { 
   Controller, Get, Post, Body, Param, Patch, Delete, 
-  ParseIntPipe, UsePipes, ValidationPipe 
+  ParseIntPipe, UsePipes, ValidationPipe, HttpStatus 
 } from '@nestjs/common';
-
-// Importamos el servicio y los DTOs que usaremos
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
+import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
+import { DefaultResponse, DefaultSuccessResponse } from '../common/interfaces/IResponse';
 
-// El decorador @Controller define la ruta base para este controlador
-// En este caso, todas las rutas empezarán con /categorias
+@ApiTags('Categoría')
 @Controller('categorias')
 export class CategoriaController {
-
-  // Inyectamos el servicio de Categoría para usar su lógica
   constructor(private readonly service: CategoriaService) {}
 
-  // Crear una nueva categoría (POST /categorias)
   @Post()
-  // Usa un pipe de validación para comprobar los datos del DTO
   @UsePipes(new ValidationPipe({ whitelist: true }))
+  @ApiOperation({ summary: 'Crear nueva categoría' })
+  @ApiBody({ type: CreateCategoriaDto })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Categoría creada correctamente',
+    type: DefaultSuccessResponse, 
+  })
+  @ApiDefaultResponses('Categoria')
   create(@Body() dto: CreateCategoriaDto) {
-    // Envía los datos al servicio para crear la categoría
     return this.service.create(dto);
   }
 
-  // Obtener todas las categorías (GET /categorias)
   @Get()
+  @ApiOperation({ summary: 'Listar todas las categorías' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Listado de categorías',
+    type: DefaultSuccessResponse, 
+  })
+  @ApiDefaultResponses('Categoria')
   findAll() {
-    // Llama al servicio para listar todas las categorías
     return this.service.findAll();
   }
 
-  // Obtener una categoría por su ID (GET /categorias/:id)
   @Get(':id')
+  @ApiOperation({ summary: 'Obtener categoría por ID' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Categoría encontrada',
+    type: DefaultSuccessResponse, 
+  })
+  @ApiDefaultResponses('Categoria')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    // Usa ParseIntPipe para asegurar que el id sea un número
     return this.service.findOne(id);
   }
 
-  // Actualizar una categoría existente (PATCH /categorias/:id)
   @Patch(':id')
   @UsePipes(new ValidationPipe({ whitelist: true }))
+  @ApiOperation({ summary: 'Actualizar categoría' })
+  @ApiBody({ type: UpdateCategoriaDto })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Categoría actualizada correctamente',
+    type: DefaultSuccessResponse,
+  })
+  @ApiDefaultResponses('Categoria')
   update(
-    @Param('id', ParseIntPipe) id: number, // obtiene y valida el ID
-    @Body() dto: UpdateCategoriaDto,        // recibe los nuevos datos
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateCategoriaDto,
   ) {
-    // Llama al servicio para actualizar la categoría
     return this.service.update(id, dto);
   }
 
-  // Eliminar una categoría (DELETE /categorias/:id)
   @Delete(':id')
+  @ApiOperation({ summary: 'Eliminar categoría' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Categoría eliminada correctamente',
+    type: DefaultSuccessResponse, 
+  })
+  @ApiDefaultResponses('Categoria')
   remove(@Param('id', ParseIntPipe) id: number) {
-    // Llama al servicio para eliminar la categoría por ID
     return this.service.remove(id);
   }
 }
