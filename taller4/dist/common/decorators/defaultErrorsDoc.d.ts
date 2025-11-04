@@ -1,1 +1,1 @@
-export declare const DefaultErrorsDoc: () => MethodDecorator;
+export declare const DefaultErrorsDoc: (entityName: string) => MethodDecorator;

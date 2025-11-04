@@ -18,6 +18,7 @@ class SwaggerDocumentation extends BaseDocumentation_1.BaseDocumentation {
             .setLicense('MIT', 'https://example.com/license')
             .addServer('http://localhost:3000')
             .addBearerAuth()
+            .addBearerAuth()
             .build();
         const document = swagger_1.SwaggerModule.createDocument(this.app, config);
         swagger_1.SwaggerModule.setup('api', this.app, document);

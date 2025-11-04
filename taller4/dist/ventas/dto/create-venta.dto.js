@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateVentaDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateVentaDto {
     fecha;
@@ -18,15 +19,39 @@ class CreateVentaDto {
 }
 exports.CreateVentaDto = CreateVentaDto;
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        name: 'fecha',
+        required: false,
+        type: String,
+        description: 'Fecha en la que se realiza la venta (opcional)',
+        example: '2025-11-03T15:30:00.000Z',
+    }),
     (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Date)
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
 ], CreateVentaDto.prototype, "fecha", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'total',
+        required: true,
+        type: Number,
+        description: 'Valor total de la venta',
+        example: 150000,
+    }),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)
 ], CreateVentaDto.prototype, "total", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        name: 'id_usuario',
+        required: true,
+        type: Number,
+        description: 'Identificador del usuario que realiza la venta',
+        example: 1,
+    }),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)
 ], CreateVentaDto.prototype, "id_usuario", void 0);
 //# sourceMappingURL=create-venta.dto.js.map

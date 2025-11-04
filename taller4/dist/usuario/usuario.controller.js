@@ -17,8 +17,11 @@ const common_1 = require("@nestjs/common");
 const usuario_service_1 = require("./usuario.service");
 const create_usuario_dto_1 = require("./dto/create-usuario.dto");
 const update_usuario_dto_1 = require("./dto/update-usuario.dto");
-const swagger_1 = require("@nestjs/swagger");
-const defaultErrorsDoc_1 = require("../common/decorators/defaultErrorsDoc");
+const Create_1 = require("./decorators/documentation/Create");
+const Delete_1 = require("./decorators/documentation/Delete");
+const GetAll_1 = require("./decorators/documentation/GetAll");
+const Update_1 = require("./decorators/documentation/Update");
+const List_1 = require("./decorators/documentation/List");
 let UsuarioController = class UsuarioController {
     userService;
     constructor(userService) {
@@ -51,38 +54,22 @@ let UsuarioController = class UsuarioController {
 };
 exports.UsuarioController = UsuarioController;
 __decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Crear un usuario',
-        description: 'Crea un nuevo usuario en la base de datos',
-    }),
-    (0, defaultErrorsDoc_1.DefaultErrorsDoc)(),
     (0, common_1.Post)('register'),
+    (0, Create_1.CreateUserDoc)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_usuario_dto_1.CreateUsuarioDto]),
     __metadata("design:returntype", void 0)
 ], UsuarioController.prototype, "createUser", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Lista los usuarios creados',
-        description: 'nos lista todos los usuarios creados en la base de datos y guardados corectamente',
-    }),
+    (0, List_1.ListUsersDoc)(),
     (0, common_1.Get)('list'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsuarioController.prototype, "listUsers", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Obtener usuario por un ID',
-        description: 'nos devuelve un usuario en especifico',
-    }),
-    (0, swagger_1.ApiParam)({
-        name: 'id',
-        description: 'Identificador numérico del usuario',
-        type: Number,
-        example: 1,
-    }),
+    (0, GetAll_1.GetAllUsersDoc)(),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -90,20 +77,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "getUser", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Actualizar usuario',
-        description: 'actualiza un usuario en la base de datos en los campos que queremos que se actualicen',
-    }),
-    (0, swagger_1.ApiParam)({
-        name: 'id',
-        description: 'Identificador numérico del usuario a actualizar',
-        type: Number,
-        example: 2,
-    }),
-    (0, swagger_1.ApiBody)({
-        description: 'Campos que pueden actualizarse del usuario',
-        type: update_usuario_dto_1.UpdateUsuarioDto,
-    }),
+    (0, Update_1.UpdateUserDoc)(),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
@@ -112,16 +86,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "updateUser", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Eliminar usuario',
-        description: 'elimina un usuario en la base de datos con su respectivo ID',
-    }),
-    (0, swagger_1.ApiParam)({
-        name: 'id',
-        description: 'Identificador del usuario a eliminar',
-        type: Number,
-        example: 3,
-    }),
+    (0, Delete_1.DeleteUserDoc)(),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),

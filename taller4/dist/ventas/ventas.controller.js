@@ -17,6 +17,11 @@ const common_1 = require("@nestjs/common");
 const ventas_service_1 = require("./ventas.service");
 const update_venta_dto_1 = require("./dto/update-venta.dto");
 const create_venta_dto_1 = require("./dto/create-venta.dto");
+const Create_1 = require("./decorators/documentation/Create");
+const Delete_1 = require("./decorators/documentation/Delete");
+const GetAll_1 = require("./decorators/documentation/GetAll");
+const List_1 = require("./decorators/documentation/List");
+const Update_1 = require("./decorators/documentation/Update");
 let VentasController = class VentasController {
     ventasService;
     constructor(ventasService) {
@@ -40,6 +45,7 @@ let VentasController = class VentasController {
 };
 exports.VentasController = VentasController;
 __decorate([
+    (0, Create_1.CreateVentaDoc)(),
     (0, common_1.Post)('crear'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -47,12 +53,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], VentasController.prototype, "crear", null);
 __decorate([
+    (0, List_1.ListVentasDoc)(),
     (0, common_1.Get)('listar'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], VentasController.prototype, "listar", null);
 __decorate([
+    (0, GetAll_1.GetAllVentasDoc)(),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -60,6 +68,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], VentasController.prototype, "obtener", null);
 __decorate([
+    (0, Update_1.UpdateVentaDoc)(),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
@@ -68,6 +77,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], VentasController.prototype, "actualizar", null);
 __decorate([
+    (0, Delete_1.DeleteVentaDoc)(),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),

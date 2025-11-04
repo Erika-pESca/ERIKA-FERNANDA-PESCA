@@ -16,6 +16,7 @@ export class SwaggerDocumentation extends BaseDocumentation {
       .setLicense('MIT', 'https://example.com/license')
       .addServer('http://localhost:3000')
       .addBearerAuth()
+      .addBearerAuth()
       .build();
 
     const document = SwaggerModule.createDocument(this.app, config);
