@@ -3,7 +3,12 @@ import { ProveedorService } from './proveedor.service';
 import { Proveedor } from './proveedor.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DefaultErrorsDoc} from '../common/decorators/defaultErrorsDoc';
-
+import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
+import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc';
+import { DefaultFindOneDoc } from '../common/decorators/DefaultFindOneDoc';
+import { DefaultUpdateDoc } from '../common/decorators/DefaultUpdateDoc';
+import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
+import { ProveedorSingularExample, ProveedorArrayExample } from './docs/ProveedorExample';
 /**
  * Controlador encargado de gestionar las operaciones relacionadas con los proveedores.
  * 
@@ -21,10 +26,8 @@ export class ProveedorController {
    * Obtiene la lista completa de proveedores registrados junto con sus productos asociados.
    * @returns Una lista con todos los proveedores y sus productos.
    */
-  @ApiOperation({ summary: 'Obtener todos los proveedores' })
-  @ApiResponse({ status: 200, description: 'Lista de proveedores', type: [Proveedor] })
-  @DefaultErrorsDoc('Proveedor')
   @Get()
+  @DefaultFindAllDoc('Proveedor', Proveedor, ProveedorArrayExample)
   findAll() {
     return this.proveedorService.findAll();
   }
@@ -34,10 +37,8 @@ export class ProveedorController {
    * @param id - Identificador numérico del proveedor a buscar.
    * @returns El proveedor correspondiente o `null` si no existe.
    */
-  @ApiOperation({ summary: 'Buscar proveedor por ID' })
-  @ApiResponse({ status: 200, description: 'Proveedor encontrado', type: Proveedor })
-  @DefaultErrorsDoc('Proveedor')
   @Get(':id')
+  @DefaultFindOneDoc('Proveedor', Proveedor, ProveedorSingularExample)
   findOne(@Param('id') id: number) {
     return this.proveedorService.findOne(id);
   }
@@ -47,10 +48,8 @@ export class ProveedorController {
    * @param proveedor - Datos del proveedor que se desea registrar.
    * @returns El proveedor creado con su información almacenada en la base de datos.
    */
-  @ApiOperation({ summary: 'Crear un nuevo proveedor' })
-  @ApiResponse({ status: 201, description: 'Proveedor creado exitosamente', type: Proveedor })
-  @DefaultErrorsDoc('Proveedor')
   @Post()
+  @DefaultCreateDoc('Proveedor', Proveedor, Proveedor, ProveedorSingularExample)
   create(@Body() proveedor: Proveedor) {
     return this.proveedorService.create(proveedor);
   }
@@ -61,10 +60,8 @@ export class ProveedorController {
    * @param proveedor - Nuevos datos del proveedor.
    * @returns El proveedor actualizado o `null` si no existe.
    */
-  @ApiOperation({ summary: 'Actualizar proveedor por ID' })
-  @ApiResponse({ status: 200, description: 'Proveedor actualizado correctamente', type: Proveedor })
-  @DefaultErrorsDoc('Proveedor')
   @Put(':id')
+  @DefaultUpdateDoc('Proveedor', Proveedor, Proveedor, ProveedorSingularExample)
   update(@Param('id') id: number, @Body() proveedor: Proveedor) {
     return this.proveedorService.update(id, proveedor);
   }
@@ -74,10 +71,8 @@ export class ProveedorController {
    * @param id - Identificador único del proveedor a eliminar.
    * @returns Un mensaje de confirmación o error si no existe.
    */
-  @ApiOperation({ summary: 'Eliminar proveedor por ID' })
-  @ApiResponse({ status: 200, description: 'Proveedor eliminado correctamente' })
-  @DefaultErrorsDoc('Proveedor')
   @Delete(':id')
+  @DefaultDeleteDoc('Proveedor')
   remove(@Param('id') id: number) {
     return this.proveedorService.remove(id);
   }

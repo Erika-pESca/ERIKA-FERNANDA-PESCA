@@ -1,12 +1,18 @@
 import {
-  Controller, Get, Post, Body, Param, Patch, Delete, ParseIntPipe, UsePipes, ValidationPipe, HttpStatus
+ Controller, Get, Post, Body, Param, Patch, Delete, ParseIntPipe, UsePipes, ValidationPipe, HttpStatus
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiParam } from '@nestjs/swagger';
+import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
+import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
+import { DefaultFindOneDoc } from '../common/decorators/DefaultFindOneDoc';
+import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc';
+import { DefaultUpdateDoc } from '../common/decorators/DefaultUpdateDoc';
+import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
 import { FacturacionService } from './facturacion.service';
 import { CreateFacturacionDto } from './dto/create-facturacion.dto';
 import { UpdateFacturacionDto } from './dto/update-facturacion.dto';
-import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
-import { DefaultResponse, DefaultSuccessResponse } from '../common/interfaces/IResponse';
+import { FacturacionResponseDto } from './dto/facturacion-response.dto'; 
+import { FacturacionSingularExample, FacturacionArrayExample } from './docs/FacturacionExample';
 
 /**
  * Controlador encargado de gestionar las operaciones relacionadas con la facturación.
@@ -25,15 +31,13 @@ export class FacturacionController {
    * @returns La factura creada.
    */
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @ApiOperation({ summary: 'Crear nueva factura' })
-  @ApiBody({ type: CreateFacturacionDto })
-  @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'Factura creada correctamente',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Facturación')
+   @UsePipes(new ValidationPipe({ whitelist: true }))
+   @DefaultCreateDoc(
+    'Facturación', 
+    CreateFacturacionDto, 
+    FacturacionResponseDto, 
+    FacturacionSingularExample
+   )
   create(@Body() dto: CreateFacturacionDto) {
     return this.service.create(dto);
   }
@@ -43,13 +47,11 @@ export class FacturacionController {
    * @returns Un arreglo con todas las facturas almacenadas.
    */
   @Get()
-  @ApiOperation({ summary: 'Listar todas las facturas' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Listado de facturas',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Facturación')
+   @DefaultFindAllDoc(
+     'Facturación', 
+     FacturacionResponseDto, 
+     FacturacionArrayExample
+   )
   findAll() {
     return this.service.findAll();
   }
@@ -60,13 +62,12 @@ export class FacturacionController {
    * @returns La factura correspondiente si existe.
    */
   @Get(':id')
-  @ApiOperation({ summary: 'Obtener factura por ID' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Factura encontrada',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Facturación')
+   @DefaultFindOneDoc(
+     'Facturación', 
+     FacturacionResponseDto, 
+     FacturacionSingularExample
+   )
+   @ApiParam({ name: 'id', description: 'ID de la factura', example: 1 })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.findOne(id);
   }
@@ -78,15 +79,14 @@ export class FacturacionController {
    * @returns La factura actualizada.
    */
   @Patch(':id')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @ApiOperation({ summary: 'Actualizar factura' })
-  @ApiBody({ type: UpdateFacturacionDto })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Factura actualizada correctamente',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Facturación')
+   @UsePipes(new ValidationPipe({ whitelist: true }))
+   @DefaultUpdateDoc(
+     'Facturación', 
+     UpdateFacturacionDto, // DTO de Entrada
+     FacturacionResponseDto, // DTO de Salida
+     FacturacionSingularExample
+   )
+   @ApiParam({ name: 'id', description: 'ID de la factura a actualizar', example: 1 })
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFacturacionDto) {
     return this.service.update(id, dto);
   }
@@ -97,13 +97,8 @@ export class FacturacionController {
    * @returns Confirmación de la eliminación.
    */
   @Delete(':id')
-  @ApiOperation({ summary: 'Eliminar factura' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Factura eliminada correctamente',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Facturación')
+  @DefaultDeleteDoc('Facturación')
+  @ApiParam({ name: 'id', description: 'ID de la factura a eliminar', example: 1 })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.service.remove(id);
   }

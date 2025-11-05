@@ -15,7 +15,7 @@ export class CreateCategoriaDto {
 
   @ApiProperty({
     description: 'Descripción opcional de la categoría',
-    example: 'Categoría de productos electrónicos',
+    example: 'Categoría de productos de ferreteria',
     required: false,
   })
   @IsOptional()

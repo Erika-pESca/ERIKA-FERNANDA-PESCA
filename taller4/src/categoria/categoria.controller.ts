@@ -8,6 +8,13 @@ import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
 import { DefaultResponse, DefaultSuccessResponse } from '../common/interfaces/IResponse';
+import { Categoria } from './categoria.entity'; 
+import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
+import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc'; 
+import { DefaultFindOneDoc } from '../common/decorators/DefaultFindOneDoc';
+import {CategoriaSingularExample, CategoriaArrayExample} from './docs/CategoriaExample'
+import { DefaultUpdateDoc } from '../common/decorators/DefaultUpdateDoc';
+import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
 
 @ApiTags('Categoría')
 @Controller('categorias')
@@ -16,52 +23,26 @@ export class CategoriaController {
 
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  @ApiOperation({ summary: 'Crear nueva categoría' })
-  @ApiBody({ type: CreateCategoriaDto })
-  @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'Categoría creada correctamente',
-    type: DefaultSuccessResponse, 
-  })
-  @ApiDefaultResponses('Categoria')
+  @DefaultCreateDoc('Categoría', CreateCategoriaDto, Categoria, CategoriaSingularExample)
   create(@Body() dto: CreateCategoriaDto) {
     return this.service.create(dto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar todas las categorías' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Listado de categorías',
-    type: DefaultSuccessResponse, 
-  })
-  @ApiDefaultResponses('Categoria')
+  @DefaultFindAllDoc('Categoría', Categoria, CategoriaArrayExample)
   findAll() {
     return this.service.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obtener categoría por ID' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Categoría encontrada',
-    type: DefaultSuccessResponse, 
-  })
-  @ApiDefaultResponses('Categoria')
+  @DefaultFindOneDoc('Categoría', Categoria, CategoriaSingularExample)
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.findOne(id);
   }
 
   @Patch(':id')
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  @ApiOperation({ summary: 'Actualizar categoría' })
-  @ApiBody({ type: UpdateCategoriaDto })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Categoría actualizada correctamente',
-    type: DefaultSuccessResponse,
-  })
-  @ApiDefaultResponses('Categoria')
+  @DefaultUpdateDoc('Categoría', UpdateCategoriaDto, Categoria, CategoriaSingularExample)
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateCategoriaDto,
@@ -70,13 +51,7 @@ export class CategoriaController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Eliminar categoría' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Categoría eliminada correctamente',
-    type: DefaultSuccessResponse, 
-  })
-  @ApiDefaultResponses('Categoria')
+  @DefaultDeleteDoc('Categoría')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.service.remove(id);
   }

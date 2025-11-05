@@ -5,6 +5,7 @@ import { Producto } from './producto.entity';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { Proveedor } from '../proveedor/proveedor.entity';
 import { Categoria } from '../categoria/categoria.entity';
+import { UpdateProductoDto } from './dto/update-producto.dto';
 
 @Injectable()
 export class ProductoService {
@@ -65,7 +66,9 @@ export class ProductoService {
   }
 
   // 🔹 Actualizar producto
-  async update(id: number, dto: CreateProductoDto): Promise<Producto> {
+  // 🔹 Actualizar producto
+async update(id: number, dto: UpdateProductoDto): Promise<Producto> {
+
     const producto = await this.productoRepository.findOne({
       where: { id_producto: id },
       relations: ['proveedor', 'categoria'],
