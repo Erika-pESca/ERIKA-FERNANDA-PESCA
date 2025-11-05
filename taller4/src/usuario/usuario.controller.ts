@@ -9,37 +9,23 @@ import { DefaultErrorsDoc } from 'src/common/decorators/defaultErrorsDoc';
 export class UsuarioController {
   constructor(private readonly userService: UsuarioService) {}
 
-  @ApiOperation({
-    summary: 'Crear un usuario',
-    description: 'Crea un nuevo usuario en la base de datos',
-  })
-@DefaultErrorsDoc()
+  
+// @DefaultErrorsDoc()
   // Crear usuario
   @Post('register')
+  @CreateUserDoc()
   createUser(@Body() body: CreateUsuarioDto) {
     return this.userService.createUser(body);
   }
 
-  @ApiOperation({
-    summary: 'Lista los usuarios creados',
-    description: 'nos lista todos los usuarios creados en la base de datos y guardados corectamente',
-  })
+  @ListUsersDoc()
   // Listar usuarios
   @Get('list')
   listUsers() {
     return this.userService.listUsers();
   }
 
-  @ApiOperation({
-    summary: 'Obtener usuario por un ID',
-    description: 'nos devuelve un usuario en especifico',
-  })
-@ApiParam({
-    name: 'id',
-    description: 'Identificador numérico del usuario',
-    type: Number,
-    example: 1,
-  })
+  @GetAllUsersDoc()
   // Obtener usuario por ID
   @Get(':id')
   async getUser(@Param('id', ParseIntPipe) id: number) {
@@ -50,20 +36,7 @@ export class UsuarioController {
   }
 
 
-  @ApiOperation({
-    summary: 'Actualizar usuario',
-    description: 'actualiza un usuario en la base de datos en los campos que queremos que se actualicen',
-  })
-  @ApiParam({
-    name: 'id',
-    description: 'Identificador numérico del usuario a actualizar',
-    type: Number,
-    example: 2,
-  })
-  @ApiBody({
-    description: 'Campos que pueden actualizarse del usuario',
-    type: UpdateUsuarioDto,
-  })
+  @UpdateUserDoc()
   // Actualizar usuario
   @Patch(':id')
   async updateUser(
@@ -77,17 +50,7 @@ export class UsuarioController {
   }
 
 
-  @ApiOperation({
-    summary: 'Eliminar usuario',
-    description: 'elimina un usuario en la base de datos con su respectivo ID',
-  })
-  
-  @ApiParam({
-    name: 'id',
-    description: 'Identificador del usuario a eliminar',
-    type: Number,
-    example: 3,
-  })
+ @DeleteUserDoc()   
   // Eliminar usuario
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number) {
