@@ -2,6 +2,8 @@ import {Body,Controller,Delete,Get,Param,ParseIntPipe,Patch,Post,NotFoundExcepti
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { ApiOperation, ApiParam, ApiBody  } from '@nestjs/swagger';
+import { DefaultErrorsDoc } from '../common/decorators/defaultErrorsDoc';
 import { CreateUserDoc } from './decorators/documentation/Create';
 import { DeleteUserDoc } from './decorators/documentation/Delete';
 import { GetAllUsersDoc } from './decorators/documentation/GetAll';
