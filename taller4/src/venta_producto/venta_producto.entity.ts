@@ -1,6 +1,6 @@
 import {Entity,PrimaryGeneratedColumn,Column,ManyToOne,JoinColumn,Index,} from 'typeorm';
-import { Ventas } from 'src/ventas/ventas.entity';
-import { Producto } from 'src/producto/producto.entity';
+import { Ventas } from '../ventas/ventas.entity';
+import { Producto } from '../producto/producto.entity';
 
 @Index(['venta', 'producto'], { unique: true })
 @Entity('venta_producto')

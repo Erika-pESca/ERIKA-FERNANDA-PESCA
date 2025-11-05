@@ -3,7 +3,7 @@ import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiOperation, ApiParam, ApiBody  } from '@nestjs/swagger';
-import { DefaultErrorsDoc } from 'src/common/decorators/DefaultErrorsDoc';
+import { DefaultErrorsDoc } from 'src/common/decorators/defaultErrorsDoc';
 
 @Controller('usuario') //definimos la ruta base para este controlador
 export class UsuarioController {

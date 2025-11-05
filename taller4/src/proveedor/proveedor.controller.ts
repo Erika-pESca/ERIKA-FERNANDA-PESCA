@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common'
 import { ProveedorService } from './proveedor.service';
 import { Proveedor } from './proveedor.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { DefaultErrorsDoc } from '../common/decorators/DefaultErrorsDoc';
+import { DefaultErrorsDoc} from '../common/decorators/defaultErrorsDoc';
 
 /**
  * Controlador encargado de gestionar las operaciones relacionadas con los proveedores.
