@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
-import { Ventas } from 'src/ventas/ventas.entity'; 
-import { Facturacion } from 'src/facturacion/facturacion.entity'; 
+import { Ventas } from '../ventas/ventas.entity'; 
+import { Facturacion } from '../facturacion/facturacion.entity'; 
 
 @Entity('usuario')
 export class Usuario {

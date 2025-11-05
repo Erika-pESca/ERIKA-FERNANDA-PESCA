@@ -2,53 +2,48 @@ import { applyDecorators, HttpStatus } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { DefaultResponse } from '../interfaces/IResponse';
 
-export const DefaultErrorsDoc = (): MethodDecorator => {
+export const DefaultErrorsDoc = (entityName: string): MethodDecorator => {
   return applyDecorators(
     ApiResponse({
       status: HttpStatus.BAD_REQUEST,
-      description: 'El usuario no fue creado correctamente',
+      description: `${entityName} no fue creado correctamente`,
       type: DefaultResponse,
       example: {
         status: HttpStatus.BAD_REQUEST,
-        message: 'El usuario no fue creado correctamente',
+        message: `${entityName} no fue creado correctamente`,
       },
     }),
 
     ApiResponse({
       status: HttpStatus.OK,
-      description: 'Usuario creado correctamente',
+      description: `${entityName} creado correctamente`,
       type: DefaultResponse,
       example: {
         status: HttpStatus.OK,
         data: {
           id: 1,
-          nombre: 'Erika',
-          apellido: 'Pesca',
-          correo: 'erika@gmail.com',
-          contrasena: '123456',
-          rol: 'Administrador',
+          message: `${entityName} creado correctamente`,
         },
-        message: 'Usuario creado correctamente',
       },
     }),
 
     ApiResponse({
       status: HttpStatus.CONFLICT,
-      description: 'El usuario ya existe',
+      description: `${entityName} ya existe`,
       type: DefaultResponse,
       example: {
         status: HttpStatus.CONFLICT,
-        message: 'El usuario ya existe',
+        message: `${entityName} ya existe`,
       },
     }),
 
     ApiResponse({
       status: HttpStatus.UNAUTHORIZED,
-      description: 'No tiene permisos para crear ese usuario',
+      description: `No tiene permisos para crear ese ${entityName}`,
       type: DefaultResponse,
       example: {
         status: HttpStatus.UNAUTHORIZED,
-        message: 'No tiene permisos para crear ese usuario',
+        message: `No tiene permisos para crear ese ${entityName}`,
       },
     }),
   );
