@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Proveedor } from '../proveedor/proveedor.entity';
-import { Categoria } from 'src/categoria/categoria.entity';
-import { VentaProducto } from 'src/venta_producto/venta_producto.entity'; // Importa la entidad
+import { Categoria } from '../categoria/categoria.entity';
+import { VentaProducto } from '../venta_producto/venta_producto.entity'; // Importa la entidad
 
 @Entity('producto')
 export class Producto {

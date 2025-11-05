@@ -1,4 +1,3 @@
-// facturacion.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,8 +7,8 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Usuario } from 'src/usuario/usuario.entity';
-import { Ventas } from 'src/ventas/ventas.entity';
+import { Usuario } from '../usuario/usuario.entity';
+import { Ventas } from '../ventas/ventas.entity';
 
 @Entity('facturacion')
 export class Facturacion {

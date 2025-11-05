@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'; // decorador que inyecta repositorios genericos de typeORM
 import { Repository } from 'typeorm';
-import { Facturacion } from 'src/facturacion/facturacion.entity';
+import { Facturacion } from '../../facturacion/facturacion.entity';
 
 @Injectable()
 export class FacturacionRepository {

@@ -1,8 +1,10 @@
-# compiled output
-/dist
-/node_modules
-/build
+# Archivos y carpetas que Git debe ignorar
 
+# Dependencias y compilados (Siempre deben estar ignorados)
+/node_modules
+/dist
+/build
+/documentation
 # Logs
 logs
 *.log
@@ -12,14 +14,17 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
-.DS_Store
+# Archivos de Lock (Importante: la mayoría ya están cubiertos por la sección de logs, pero añadimos el lock)
+package-lock.json
 
-# Tests
-/coverage
-/.nyc_output
+# Entorno
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-# IDEs and editors
+# IDEs (Entornos de desarrollo)
 /.idea
 .project
 .classpath
@@ -27,24 +32,24 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-
-# temp directory
+# Sistema Operativo y Temporales
+.DS_Store
+Thumbs.db
+/coverage
+/.nyc_output
 .temp
 .tmp
+*.tmp
+*.swp
+
+# Documentación generada automáticamente
+documentation/generated/
 
 # Runtime data
 pids
@@ -52,5 +57,5 @@ pids
 *.seed
 *.pid.lock
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
+# Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

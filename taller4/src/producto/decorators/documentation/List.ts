@@ -1,7 +1,7 @@
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "src/common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "src/common/decorators/defaultErrorsDoc";
+import { DefaultResponse } from "../../../common/interfaces/IResponse";
+import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
 
 export const ListProductoDoc = (): MethodDecorator => {
   return applyDecorators(

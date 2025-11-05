@@ -1,9 +1,9 @@
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "src/common/interfaces/IResponse";  
-import { DefaultErrorsDoc } from "src/common/decorators/defaultErrorsDoc";
-import { Producto } from "src/producto/producto.entity";
-import { Proveedor } from "src/proveedor/proveedor.entity";
+import { DefaultResponse } from "../../../common/interfaces/IResponse";  
+import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
+import { Producto } from "../../../producto/producto.entity";
+import { Proveedor } from "../../../proveedor/proveedor.entity";
 
 export const GetAllProductoDoc = (): MethodDecorator => {
   return applyDecorators(

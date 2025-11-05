@@ -17,11 +17,11 @@ import { VentasController } from './ventas.controller';
 import { VentasRepository } from '../usuario/providers/ventas.repository';
 
 // Importa las entidades relacionadas.
-import { Usuario } from 'src/usuario/usuario.entity';
-import { Facturacion } from 'src/facturacion/facturacion.entity';
+import { Usuario } from '../usuario/usuario.entity';
+import { Facturacion } from '../facturacion/facturacion.entity';
 
 // Importa el módulo de facturación para poder acceder a su servicio y repositorio exportados.
-import { FacturacionModule } from 'src/facturacion/facturacion.module';
+import { FacturacionModule } from '../facturacion/facturacion.module';
 
 /**
  * Módulo de Ventas

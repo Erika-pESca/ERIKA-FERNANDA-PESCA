@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Ventas } from './ventas.entity';
-import { Usuario } from 'src/usuario/usuario.entity';
-import { Facturacion } from 'src/facturacion/facturacion.entity';
+import { Usuario } from '../usuario/usuario.entity';
+import { Facturacion } from '../facturacion/facturacion.entity';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 
 @Injectable()
