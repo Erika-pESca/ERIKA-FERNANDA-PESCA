@@ -1,10 +1,10 @@
-import { Categoria } from "src/categoria/categoria.entity"
+import { Categoria } from "../../../categoria/categoria.entity"
     import { applyDecorators, HttpStatus } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiBearerAuth, ApiBody, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "src/common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "src/common/decorators/defaultErrorsDoc";
-import { CreateVentaDto } from "src/ventas/dto/create-venta.dto";
-import { Producto } from "src/producto/producto.entity";
+import { DefaultResponse } from "../../../common/interfaces/IResponse";
+import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
+import { CreateVentaDto } from "../../dto/create-venta.dto";
+import { Producto } from "../../../producto/producto.entity";
 
 export const CreateVentaDoc = (): MethodDecorator => {
   return applyDecorators(

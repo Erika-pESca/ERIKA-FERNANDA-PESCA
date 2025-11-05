@@ -8,10 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Facturacion } from './facturacion.entity';
 
 // Importa la entidad Ventas, necesaria para establecer la relación entre venta y facturación.
-import { Ventas } from 'src/ventas/ventas.entity';
+import { Ventas } from '../ventas/ventas.entity';
 
 // Importa la entidad Usuario, ya que una factura está asociada a un usuario (cliente o administrador).
-import { Usuario } from 'src/usuario/usuario.entity';
+import { Usuario } from '../usuario/usuario.entity';
 
 // Importa el servicio que contiene la lógica de negocio de la facturación.
 import { FacturacionService } from './facturacion.service';

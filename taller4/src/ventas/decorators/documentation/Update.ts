@@ -1,8 +1,8 @@
 import { applyDecorators, HttpStatus } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody } from '@nestjs/swagger';
-import { DefaultResponse } from 'src/common/interfaces/IResponse';
-import { DefaultErrorsDoc } from 'src/common/decorators/defaultErrorsDoc';
-import { UpdateVentaDto } from 'src/ventas/dto/update-venta.dto';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { UpdateVentaDto } from '../../../ventas/dto/update-venta.dto';
 
 export const UpdateVentaDoc = (): MethodDecorator => {
   return applyDecorators(

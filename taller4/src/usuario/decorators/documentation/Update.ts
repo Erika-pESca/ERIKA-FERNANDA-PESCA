@@ -1,8 +1,8 @@
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody } from "@nestjs/swagger";
-import { DefaultResponse } from "src/common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "src/common/decorators/defaultErrorsDoc";
-import { UpdateUsuarioDto } from "src/usuario/dto/update-usuario.dto";
+import { DefaultResponse } from "../../../common/interfaces/IResponse";
+import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
+import { UpdateUsuarioDto } from "../../../usuario/dto/update-usuario.dto";
 
 export const UpdateUserDoc = (): MethodDecorator => {
   return applyDecorators(

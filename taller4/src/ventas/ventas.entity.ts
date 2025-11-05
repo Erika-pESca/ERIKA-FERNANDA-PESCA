@@ -8,9 +8,9 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Usuario } from 'src/usuario/usuario.entity';
-import { Facturacion } from 'src/facturacion/facturacion.entity';
-import { VentaProducto } from 'src/venta_producto/venta_producto.entity'; // ✅ relación con la tabla intermedia
+import { Usuario } from '../usuario/usuario.entity';
+import { Facturacion } from '../facturacion/facturacion.entity';
+import { VentaProducto } from '../venta_producto/venta_producto.entity'; // ✅ relación con la tabla intermedia
 
 @Entity('ventas')
 export class Ventas {
