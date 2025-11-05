@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common'
 import { ProveedorService } from './proveedor.service';
 import { Proveedor } from './proveedor.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { DefaultErrorsDoc } from '../common/decorators/DefaultErrorsDoc';
+import { DefaultErrorsDoc} from '../common/decorators/DefaultErrorsDoc';
 
 /**
  * Controlador encargado de gestionar las operaciones relacionadas con los proveedores.
@@ -23,7 +23,7 @@ export class ProveedorController {
    */
   @ApiOperation({ summary: 'Obtener todos los proveedores' })
   @ApiResponse({ status: 200, description: 'Lista de proveedores', type: [Proveedor] })
-  @DefaultErrorsDoc()
+  @DefaultErrorsDoc('Proveedor')
   @Get()
   findAll() {
     return this.proveedorService.findAll();
@@ -36,7 +36,7 @@ export class ProveedorController {
    */
   @ApiOperation({ summary: 'Buscar proveedor por ID' })
   @ApiResponse({ status: 200, description: 'Proveedor encontrado', type: Proveedor })
-  @DefaultErrorsDoc()
+  @DefaultErrorsDoc('Proveedor')
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.proveedorService.findOne(id);
@@ -49,7 +49,7 @@ export class ProveedorController {
    */
   @ApiOperation({ summary: 'Crear un nuevo proveedor' })
   @ApiResponse({ status: 201, description: 'Proveedor creado exitosamente', type: Proveedor })
-  @DefaultErrorsDoc()
+  @DefaultErrorsDoc('Proveedor')
   @Post()
   create(@Body() proveedor: Proveedor) {
     return this.proveedorService.create(proveedor);
@@ -63,7 +63,7 @@ export class ProveedorController {
    */
   @ApiOperation({ summary: 'Actualizar proveedor por ID' })
   @ApiResponse({ status: 200, description: 'Proveedor actualizado correctamente', type: Proveedor })
-  @DefaultErrorsDoc()
+  @DefaultErrorsDoc('Proveedor')
   @Put(':id')
   update(@Param('id') id: number, @Body() proveedor: Proveedor) {
     return this.proveedorService.update(id, proveedor);
@@ -76,7 +76,7 @@ export class ProveedorController {
    */
   @ApiOperation({ summary: 'Eliminar proveedor por ID' })
   @ApiResponse({ status: 200, description: 'Proveedor eliminado correctamente' })
-  @DefaultErrorsDoc()
+  @DefaultErrorsDoc('Proveedor')
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.proveedorService.remove(id);
