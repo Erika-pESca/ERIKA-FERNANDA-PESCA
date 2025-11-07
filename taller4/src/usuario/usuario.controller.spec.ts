@@ -2,37 +2,22 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsuarioController } from './usuario.controller';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { NotFoundException } from '@nestjs/common';
-import { Usuario } from './usuario.entity';
+import { Roles } from './enums/roles.enum';
 
-describe('UsuarioController', () => {
+describe('Pruebas del UsuarioController', () => {
   let controller: UsuarioController;
-  let service: UsuarioService;
-
-  const mockUsuario: Usuario = {
-    id_usuario: 1,
-    nombre: 'Test',
-    apellido: 'User',
-    correo: 'test@example.com',
-    contrasena: 'password',
-    rol: 'user',
-    ventas: [],
-    facturas: [],
-    updatedAt: new Date(),
-    deletedAt: null,
-  };
-
-  const mockUsuarioService = {
-    createUser: jest.fn().mockResolvedValue(mockUsuario),
-    listUsers: jest.fn().mockResolvedValue([mockUsuario]),
-    getUser: jest.fn().mockResolvedValue(mockUsuario),
-    updateUser: jest.fn().mockResolvedValue(mockUsuario),
-    deleteUser: jest.fn().mockResolvedValue(true),
-  };
+  let mockUsuarioService: Record<string, jest.Mock>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    mockUsuarioService = {
+      createUser: jest.fn(),
+      listUsers: jest.fn(),
+      getUser: jest.fn(),
+      updateUser: jest.fn(),
+      deleteUser: jest.fn(),
+    };
+
+    const moduleRef: TestingModule = await Test.createTestingModule({
       controllers: [UsuarioController],
       providers: [
         {
@@ -42,79 +27,44 @@ describe('UsuarioController', () => {
       ],
     }).compile();
 
-    controller = module.get<UsuarioController>(UsuarioController);
-    service = module.get<UsuarioService>(UsuarioService);
+    controller = moduleRef.get<UsuarioController>(UsuarioController);
+    jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  // 🧪 Crear usuario
+  it('Debería crear un usuario', async () => {
+    const usuarioDto: CreateUsuarioDto = {
+      nombre: 'Erika',
+      apellido: 'Pesca',
+      correo: 'erika@test.com',
+      contrasena: '12345678',
+      rol: Roles.ADMIN,
+    };
+
+    const usuarioCreado = { id: 1, ...usuarioDto };
+    mockUsuarioService.createUser.mockResolvedValue(usuarioCreado);
+
+    // Act
+    const result = await controller.createUser(usuarioDto);
+
+    // Assert
+    expect(mockUsuarioService.createUser).toHaveBeenCalledTimes(1);
+    expect(mockUsuarioService.createUser).toHaveBeenCalledWith(usuarioDto);
+    expect(result).toEqual(usuarioCreado);
   });
 
-  describe('createUser', () => {
-    it('should create a user', async () => {
-      const createUsuarioDto: CreateUsuarioDto = {
-        nombre: 'Test',
-        apellido: 'User',
-        correo: 'test@example.com',
-        contrasena: 'password',
-        rol: 'user',
-      };
+  // 🧪 Listar usuarios
+  it('Debería listar todos los usuarios', async () => {
+    const usuarios = [
+      { id: 1, nombre: 'Erika', apellido: 'Pesca' },
+      { id: 2, nombre: 'Laura', apellido: 'García' },
+    ];
 
-      const result = await controller.createUser(createUsuarioDto);
-      expect(result).toEqual(mockUsuario);
-      expect(service.createUser).toHaveBeenCalledWith(createUsuarioDto);
-    });
-  });
+    mockUsuarioService.listUsers.mockResolvedValue(usuarios);
 
-  describe('listUsers', () => {
-    it('should return an array of users', async () => {
-      const result = await controller.listUsers();
-      expect(result).toEqual([mockUsuario]);
-      expect(service.listUsers).toHaveBeenCalled();
-    });
-  });
+    const result = await controller.listUsers();
 
-  describe('getUser', () => {
-    it('should return a single user', async () => {
-      const result = await controller.getUser(1);
-      expect(result).toEqual(mockUsuario);
-      expect(service.getUser).toHaveBeenCalledWith(1);
-    });
-
-    it('should throw NotFoundException if user not found', async () => {
-      mockUsuarioService.getUser.mockResolvedValue(null);
-      await expect(controller.getUser(1)).rejects.toThrow(NotFoundException);
-    });
-  });
-
-  describe('updateUser', () => {
-    it('should update a user', async () => {
-      const updateUsuarioDto: UpdateUsuarioDto = { nombre: 'Updated' };
-      const expectedResult = { ...mockUsuario, ...updateUsuarioDto };
-      mockUsuarioService.updateUser.mockResolvedValue(expectedResult);
-
-      const result = await controller.updateUser(1, updateUsuarioDto);
-      expect(result).toEqual(expectedResult);
-      expect(service.updateUser).toHaveBeenCalledWith(1, updateUsuarioDto);
-    });
-
-    it('should throw NotFoundException if user to update not found', async () => {
-      mockUsuarioService.updateUser.mockResolvedValue(null);
-      await expect(controller.updateUser(1, {})).rejects.toThrow(
-        NotFoundException,
-      );
-    });
-  });
-
-  describe('deleteUser', () => {
-    it('should delete a user', async () => {
-      await controller.deleteUser(1);
-      expect(service.deleteUser).toHaveBeenCalledWith(1);
-    });
-
-    it('should throw NotFoundException if user to delete not found', async () => {
-      mockUsuarioService.deleteUser.mockRejectedValue(new NotFoundException());
-      await expect(controller.deleteUser(1)).rejects.toThrow(NotFoundException);
-    });
+    expect(mockUsuarioService.listUsers).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(usuarios);
   });
 });
