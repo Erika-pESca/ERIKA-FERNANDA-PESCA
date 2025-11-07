@@ -45,7 +45,7 @@ export class VentasController {
    */
   @CreateVentaDoc()
   @Post('crear')
-  async crear(@Body() datos: CreateVentaDto): Promise<Ventas> {
+  async create(@Body() datos: CreateVentaDto): Promise<Ventas> {
     return this.ventasService.createVenta(datos);
   }
 
@@ -59,7 +59,7 @@ export class VentasController {
    */
   @ListVentasDoc()
   @Get('listar')
-  async listar(): Promise<Ventas[]> {
+  async list(): Promise<Ventas[]> {
     // Llamamos al método que devuelve todas las ventas
     return this.ventasService.findAll();
   }
@@ -73,7 +73,7 @@ export class VentasController {
    */
   @GetAllVentasDoc()
   @Get(':id')
-  async obtener(@Param('id', ParseIntPipe) id: number): Promise<Ventas | null> {
+  async get(@Param('id', ParseIntPipe) id: number): Promise<Ventas | null> {
     return this.ventasService.getVenta(id);
   }
 
@@ -87,7 +87,7 @@ export class VentasController {
    */
   @UpdateVentaDoc()
   @Patch(':id')
-  async actualizar(
+  async allowUpdate(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: UpdateVentaDto,
   ): Promise<Ventas | null> {
@@ -103,7 +103,7 @@ export class VentasController {
    */
   @DeleteVentaDoc()
   @Delete(':id')
-  async eliminar(
+  async delete(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<{ message: string }> {
     await this.ventasService.deleteVenta(id);
