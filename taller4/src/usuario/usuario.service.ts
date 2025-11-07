@@ -97,7 +97,7 @@ export class UsuarioService {
    * @param email Correo electrónico del usuario.
    * @returns El usuario encontrado o `undefined` si no existe.
    */
-  async findByEmail(email: string): Promise<Usuario | undefined> {
+  async findByEmail(email: string): Promise<Usuario | null> {
     return this.userRepo.findByEmail(email);
   }
 }

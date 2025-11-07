@@ -15,8 +15,9 @@ export class UsuarioRepository {
   ) {}
 
   // Crea usuario (hashea contraseña)
-  async createUser(body: CreateUsuarioDto) { // Crea un nuevo registro de Usuario en la base de datos
-   // La parte crítica es hashear (cifrar) la contraseña antes de guardarla
+  async createUser(body: CreateUsuarioDto) {
+    // Crea un nuevo registro de Usuario en la base de datos
+    // La parte crítica es hashear (cifrar) la contraseña antes de guardarla
     const saltRounds = 10; // número de iteraciones para cifrar la contraseña
     const hashed = await bcrypt.hash(body.contrasena, saltRounds);
     const user = this.repo.create({
@@ -27,20 +28,20 @@ export class UsuarioRepository {
     });
     return this.repo.save(user);
   }
-// Listar todos los usuarios
+  // Listar todos los usuarios
   findAll() {
     return this.repo.find();
   }
-// Obtener usuario por ID
+  // Obtener usuario por ID
   findOne(id: number) {
     return this.repo.findOne({ where: { id_usuario: id } });
   }
-// Obtener usuario por correo
+  // Obtener usuario por correo
   findByEmail(email: string) {
     return this.repo.findOne({ where: { correo: email } });
   }
-// Actualizar los datos de un usuario por ID
-  async updateUser(id: number, body: UpdateUsuarioDto) {
+  // Actualizar los datos de un usuario por ID
+  async updateUser(id: number, body: UpdateUsuarioDto): Promise<Usuario> {
     // si actualiza contraseña, hashearla
     if (body.contrasena) {
       // si la incluye, se volvera a hashear antes de guardar
@@ -48,9 +49,15 @@ export class UsuarioRepository {
       body.contrasena = await bcrypt.hash(body.contrasena, saltRounds);
     }
     await this.repo.update({ id_usuario: id }, { ...body });
-    return this.findOne(id);
+    const updatedUser = await this.findOne(id);
+    if (!updatedUser) {
+      throw new Error(
+        `Usuario con ID ${id} no encontrado después de la actualización.`,
+      );
+    }
+    return updatedUser;
   }
-// Eliminar usuario por ID
+  // Eliminar usuario por ID
   deleteUser(id: number) {
     return this.repo.delete({ id_usuario: id });
   }
