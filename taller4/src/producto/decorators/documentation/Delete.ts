@@ -1,7 +1,12 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";  
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 export const DeleteProductoDoc = (): MethodDecorator => {
   return applyDecorators(
     ApiBearerAuth(),
@@ -28,6 +33,6 @@ export const DeleteProductoDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Producto') 
+    DefaultErrorsDoc('Producto'),
   );
-}
+};

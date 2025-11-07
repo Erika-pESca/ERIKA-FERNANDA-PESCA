@@ -1,8 +1,13 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { Producto } from "../../../producto/producto.entity";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { Producto } from '../../../producto/producto.entity';
 
 export const GetAllVentasDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -19,7 +24,7 @@ export const GetAllVentasDoc = (): MethodDecorator => {
       description: 'Identificador del usuario a obtener',
       type: Number,
       example: 1,
-    }), 
+    }),
 
     ApiResponse({
       status: HttpStatus.OK,
@@ -34,7 +39,7 @@ export const GetAllVentasDoc = (): MethodDecorator => {
           correo: 'erika@gmail.com',
           contrasena: '123456',
           rol: 'Administrador',
-          Producto: 'mangera', 
+          Producto: 'mangera',
           precio: 100,
           cantidad: 1,
           fecha: '2022-01-01',
@@ -43,6 +48,6 @@ export const GetAllVentasDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Venta')
+    DefaultErrorsDoc('Venta'),
   );
-};  
+};

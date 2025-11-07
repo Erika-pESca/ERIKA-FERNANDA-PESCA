@@ -1,8 +1,14 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { UpdateUsuarioDto } from "../../../usuario/dto/update-usuario.dto";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+  ApiBody,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { UpdateUsuarioDto } from '../../../usuario/dto/update-usuario.dto';
 
 export const UpdateUserDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -43,6 +49,6 @@ export const UpdateUserDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Usuario') 
+    DefaultErrorsDoc('Usuario'),
   );
-}
+};

@@ -7,7 +7,6 @@ import { NotFoundException } from '@nestjs/common';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
-
 describe('CategoriaService', () => {
   let service: CategoriaService;
   let repo: Partial<Record<keyof Repository<Categoria>, jest.Mock>>;
@@ -47,8 +46,11 @@ describe('CategoriaService', () => {
   // Test del método create
   describe('create', () => {
     it('debe crear una categoría correctamente', async () => {
-      const dto: CreateCategoriaDto = { nombre: 'Categoria Test', descripcion: 'Descripción de prueba' };
-      
+      const dto: CreateCategoriaDto = {
+        nombre: 'Categoria Test',
+        descripcion: 'Descripción de prueba',
+      };
+
       // Simula los métodos create y save del repositorio
       repo.create!.mockReturnValue(categoriaMock);
       repo.save!.mockResolvedValue(categoriaMock);
@@ -81,7 +83,9 @@ describe('CategoriaService', () => {
 
     it('debe lanzar NotFoundException si no existe', async () => {
       repo.findOne!.mockResolvedValue(null); // Simula que no encuentra la categoría
-      await expect(service.findOne(999)).rejects.toThrow(new NotFoundException('Categoría no encontrada'));
+      await expect(service.findOne(999)).rejects.toThrow(
+        new NotFoundException('Categoría no encontrada'),
+      );
     });
   });
 
@@ -116,7 +120,9 @@ describe('CategoriaService', () => {
 
     it('debe lanzar NotFoundException si no existe', async () => {
       repo.findOne!.mockResolvedValue(null); // Simula que no encuentra la categoría
-      await expect(service.remove(999)).rejects.toThrow(new NotFoundException('Categoría no encontrada'));
+      await expect(service.remove(999)).rejects.toThrow(
+        new NotFoundException('Categoría no encontrada'),
+      );
     });
   });
 });

@@ -7,7 +7,7 @@ import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
 /**
  * Servicio que gestiona las operaciones CRUD para las categorías de productos.
- * 
+ *
  * Implementa la lógica necesaria para crear, consultar, actualizar y eliminar categorías
  * en la base de datos, utilizando el repositorio de TypeORM.
  */

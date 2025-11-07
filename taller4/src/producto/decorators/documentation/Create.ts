@@ -1,11 +1,16 @@
-
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiBody, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { CreateProductoDto } from "../../../producto/dto/create-producto.dto";
-import { Producto } from "../../../producto/producto.entity";
-import { Categoria } from "../../../categoria/categoria.entity";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { CreateProductoDto } from '../../../producto/dto/create-producto.dto';
+import { Producto } from '../../../producto/producto.entity';
+import { Categoria } from '../../../categoria/categoria.entity';
 
 export const CreateProductoDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -37,15 +42,14 @@ export const CreateProductoDoc = (): MethodDecorator => {
         data: {
           id: 1,
           Categoria: 'riego',
-          Producto: 'mangera', 
+          Producto: 'mangera',
           precio: 100,
           cantidad: 1,
-          
         },
         message: 'Producto creado correctamente',
       },
     }),
 
-    DefaultErrorsDoc('Producto') // Aquí se agregan las respuestas de error comunes
+    DefaultErrorsDoc('Producto'), // Aquí se agregan las respuestas de error comunes
   );
-};  
+};

@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
-import { Ventas } from '../ventas/ventas.entity'; 
-import { Facturacion } from '../facturacion/facturacion.entity'; 
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
+import { Ventas } from '../ventas/ventas.entity';
+import { Facturacion } from '../facturacion/facturacion.entity';
 
 @Entity('usuario')
 export class Usuario {
@@ -24,19 +31,19 @@ export class Usuario {
   @OneToMany(() => Ventas, (venta) => venta.usuario, { nullable: true })
   ventas?: Ventas[];
   // RELACIÓN UNO A MUCHOS: Un Usuario puede tener MUCHAS Ventas.
-   // 1. () => Ventas: Define la entidad relacionada.
-   // 2. (venta) => venta.usuario: Define la propiedad en la entidad Ventas que mapea de vuelta a Usuario.
-   // 3. nullable: true: Indica que, aunque una venta requiere un usuario, el lado del array puede estar vacío.
-   //'ventas?: Ventas[]' es la propiedad que contendrá el array de ventas si se carga la relación.
-   
+  // 1. () => Ventas: Define la entidad relacionada.
+  // 2. (venta) => venta.usuario: Define la propiedad en la entidad Ventas que mapea de vuelta a Usuario.
+  // 3. nullable: true: Indica que, aunque una venta requiere un usuario, el lado del array puede estar vacío.
+  //'ventas?: Ventas[]' es la propiedad que contendrá el array de ventas si se carga la relación.
 
-  @OneToMany(() => Facturacion, (factura) => factura.usuario, { nullable: true })
+  @OneToMany(() => Facturacion, (factura) => factura.usuario, {
+    nullable: true,
+  })
   facturas?: Facturacion[]; // indican que es un array de entidades opcional
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  
   @DeleteDateColumn()
   deletedAt: Date;
 }

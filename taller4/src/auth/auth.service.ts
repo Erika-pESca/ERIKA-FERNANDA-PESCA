@@ -47,7 +47,11 @@ export class AuthService {
     const user = await this.validateUser(loginDto.correo, loginDto.contrasena);
     if (!user) throw new UnauthorizedException('Credenciales inválidas');
 
-    const payload = { correo: user.correo, rol: user.rol, sub: user.id_usuario };
+    const payload = {
+      correo: user.correo,
+      rol: user.rol,
+      sub: user.id_usuario,
+    };
     return {
       access_token: this.jwtService.sign(payload),
     };

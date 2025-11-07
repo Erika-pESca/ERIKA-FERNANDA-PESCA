@@ -1,8 +1,12 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 
 export const GetAllUsersDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -19,7 +23,7 @@ export const GetAllUsersDoc = (): MethodDecorator => {
       description: 'Identificador del usuario a obtener',
       type: Number,
       example: 1,
-    }), 
+    }),
 
     ApiResponse({
       status: HttpStatus.OK,
@@ -39,6 +43,6 @@ export const GetAllUsersDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Usuario')
+    DefaultErrorsDoc('Usuario'),
   );
 };

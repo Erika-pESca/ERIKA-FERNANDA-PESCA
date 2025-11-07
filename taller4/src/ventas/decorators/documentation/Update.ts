@@ -1,5 +1,11 @@
 import { applyDecorators, HttpStatus } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+  ApiBody,
+} from '@nestjs/swagger';
 import { DefaultResponse } from '../../../common/interfaces/IResponse';
 import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 import { UpdateVentaDto } from '../../../ventas/dto/update-venta.dto';
@@ -10,7 +16,8 @@ export const UpdateVentaDoc = (): MethodDecorator => {
 
     ApiOperation({
       summary: 'Actualizar una venta',
-      description: 'Actualiza los datos de una venta existente en la base de datos',
+      description:
+        'Actualiza los datos de una venta existente en la base de datos',
     }),
 
     ApiParam({
@@ -21,31 +28,30 @@ export const UpdateVentaDoc = (): MethodDecorator => {
     }),
 
     ApiBody({
-  description: 'Datos de la venta a actualizar',
-  required: true,
-  schema: {
-    type: 'object',
-    properties: {
-      fecha: {
-        type: 'string',
-        format: 'date-time',
-        example: '2025-11-03T15:30:00.000Z',
-        description: 'Fecha de la venta en formato ISO 8601',
+      description: 'Datos de la venta a actualizar',
+      required: true,
+      schema: {
+        type: 'object',
+        properties: {
+          fecha: {
+            type: 'string',
+            format: 'date-time',
+            example: '2025-11-03T15:30:00.000Z',
+            description: 'Fecha de la venta en formato ISO 8601',
+          },
+          total: {
+            type: 'number',
+            example: 200000,
+            description: 'Valor total de la venta',
+          },
+          id_usuario: {
+            type: 'number',
+            example: 1,
+            description: 'Identificador del usuario que realiza la venta',
+          },
+        },
       },
-      total: {
-        type: 'number',
-        example: 200000,
-        description: 'Valor total de la venta',
-      },
-      id_usuario: {
-        type: 'number',
-        example: 1,
-        description: 'Identificador del usuario que realiza la venta',
-      },
-    },
-  },
-}),
-
+    }),
 
     ApiResponse({
       status: HttpStatus.OK,

@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module'; // Módulo de autenticación (J
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password:  '1234', //'250622',
+      password: '250622', //'250622',
       database: 'ferreteria',
       autoLoadEntities: true, // Detecta automáticamente las entidades
       synchronize: true, // Solo en desarrollo, elimina y recrea tablas

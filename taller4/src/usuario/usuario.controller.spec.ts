@@ -31,7 +31,7 @@ describe('Pruebas del UsuarioController', () => {
     jest.clearAllMocks();
   });
 
-  // 🧪 Crear usuario
+  // Crear usuario
   it('Debería crear un usuario', async () => {
     const usuarioDto: CreateUsuarioDto = {
       nombre: 'Erika',

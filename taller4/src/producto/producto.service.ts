@@ -67,8 +67,7 @@ export class ProductoService {
 
   // 🔹 Actualizar producto
   // 🔹 Actualizar producto
-async update(id: number, dto: UpdateProductoDto): Promise<Producto> {
-
+  async update(id: number, dto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.productoRepository.findOne({
       where: { id_producto: id },
       relations: ['proveedor', 'categoria'],

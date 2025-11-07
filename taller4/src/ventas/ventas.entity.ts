@@ -35,13 +35,12 @@ export class Ventas {
   usuario: Usuario;
 
   // 🧾 Relación 1:1 con facturación
-@OneToOne(() => Facturacion, (factura) => factura.venta, {
-  cascade: true,
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-})
-facturacion: Facturacion;
-
+  @OneToOne(() => Facturacion, (factura) => factura.venta, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  facturacion: Facturacion;
 
   // 🧩 Relación con venta_producto (una venta puede tener muchos productos)
   @OneToMany(() => VentaProducto, (vp) => vp.venta, {

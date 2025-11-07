@@ -39,7 +39,10 @@ describe('CategoriaController', () => {
 
   // Prueba la creación de una categoría
   it('debería crear una categoría', async () => {
-    const dto: CreateCategoriaDto = { nombre: 'Comida', descripcion: 'Platillos típicos' };
+    const dto: CreateCategoriaDto = {
+      nombre: 'Comida',
+      descripcion: 'Platillos típicos',
+    };
     const mockCategoria: Categoria = { id_categoria: 1, ...dto, productos: [] };
 
     jest.spyOn(service, 'create').mockResolvedValue(mockCategoria);
@@ -51,7 +54,9 @@ describe('CategoriaController', () => {
 
   // Prueba obtener todas las categorías
   it('debería retornar todas las categorías', async () => {
-    const mockCategorias: Categoria[] = [{ id_categoria: 1, nombre: 'Bebidas', productos: [] }];
+    const mockCategorias: Categoria[] = [
+      { id_categoria: 1, nombre: 'Bebidas', productos: [] },
+    ];
 
     jest.spyOn(service, 'findAll').mockResolvedValue(mockCategorias);
 
@@ -63,7 +68,11 @@ describe('CategoriaController', () => {
   // Prueba obtener una categoría por ID
   it('debería retornar una categoría por ID', async () => {
     const id = 1;
-    const mockCategoria: Categoria = { id_categoria: id, nombre: 'Postres', productos: [] };
+    const mockCategoria: Categoria = {
+      id_categoria: id,
+      nombre: 'Postres',
+      productos: [],
+    };
 
     jest.spyOn(service, 'findOne').mockResolvedValue(mockCategoria);
 
@@ -76,7 +85,11 @@ describe('CategoriaController', () => {
   it('debería actualizar una categoría', async () => {
     const id = 1;
     const dto: UpdateCategoriaDto = { nombre: 'Comidas Rápidas' };
-    const mockCategoria: Categoria = { id_categoria: id, nombre: dto.nombre!, productos: [] };
+    const mockCategoria: Categoria = {
+      id_categoria: id,
+      nombre: dto.nombre!,
+      productos: [],
+    };
 
     jest.spyOn(service, 'update').mockResolvedValue(mockCategoria);
 
@@ -88,7 +101,11 @@ describe('CategoriaController', () => {
   // Prueba eliminar una categoría
   it('debería eliminar una categoría', async () => {
     const id = 1;
-    const mockCategoria: Categoria = { id_categoria: id, nombre: 'Eliminar', productos: [] };
+    const mockCategoria: Categoria = {
+      id_categoria: id,
+      nombre: 'Eliminar',
+      productos: [],
+    };
 
     jest.spyOn(service, 'remove').mockResolvedValue(mockCategoria);
 

@@ -1,8 +1,7 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 
 export const ListUsersDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -36,12 +35,11 @@ export const ListUsersDoc = (): MethodDecorator => {
             contrasena: '125234',
             rol: 'Usuario',
           },
-
         ],
         message: 'Lista de usuarios',
       },
     }),
 
-    DefaultErrorsDoc('Usuario') 
+    DefaultErrorsDoc('Usuario'),
   );
-}
+};

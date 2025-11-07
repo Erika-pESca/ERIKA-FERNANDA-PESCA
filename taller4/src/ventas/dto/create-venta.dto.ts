@@ -1,5 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsDateString, IsNumber, IsOptional, IsPositive } from 'class-validator';
+import {
+  IsDateString,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+} from 'class-validator';
 
 /**
  * DTO para crear una venta
@@ -14,8 +19,8 @@ export class CreateVentaDto {
     example: '2025-11-03T15:30:00.000Z',
   })
   @IsOptional()
-  @IsDateString() 
-  fecha?: string; 
+  @IsDateString()
+  fecha?: string;
 
   @ApiProperty({
     name: 'total',

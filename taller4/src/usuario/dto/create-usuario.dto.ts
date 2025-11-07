@@ -1,16 +1,22 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { Roles } from '../enums/roles.enum';
 import { ApiProperty } from '@nestjs/swagger';
 // definimos la estructura de datos de un usuario
 export class CreateUsuarioDto {
-
-@ApiProperty({
-  name: 'nombre',
-  required: true,
-  type: String,
-  description: 'Nombre del usuario',
-  example: 'Erika',
-})
+  @ApiProperty({
+    name: 'nombre',
+    required: true,
+    type: String,
+    description: 'Nombre del usuario',
+    example: 'Erika',
+  })
   @IsString() // cadena de texto
   @MinLength(3) // longitud mínima 3
   @MaxLength(100) // longitud máxima 100
@@ -43,14 +49,13 @@ export class CreateUsuarioDto {
   @IsNotEmpty() // no puede estar vacío
   correo: string; // correo
 
-
-@ApiProperty({
-  name: 'contrasena',
-  required: true,
-  type: String,
-  description: 'Contraseña del usuario',
-  example: '123456',
-})
+  @ApiProperty({
+    name: 'contrasena',
+    required: true,
+    type: String,
+    description: 'Contraseña del usuario',
+    example: '123456',
+  })
   @IsString()
   @MinLength(8)
   @MaxLength(100)

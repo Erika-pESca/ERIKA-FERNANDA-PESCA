@@ -124,6 +124,10 @@ describe('FacturacionController', () => {
   // Prueba la eliminación de una factura
   it('debería eliminar una factura', async () => {
     const id = 1;
+<<<<<<< HEAD
+=======
+    const mockResponse = undefined;
+>>>>>>> 55e99079 (Guardo cambios locales antes del rebase)
 
     jest.spyOn(service, 'remove').mockResolvedValue({} as Facturacion);
 

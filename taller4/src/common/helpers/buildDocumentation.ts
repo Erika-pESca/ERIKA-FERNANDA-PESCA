@@ -10,7 +10,9 @@ export class SwaggerDocumentation extends BaseDocumentation {
   async build(): Promise<void> {
     const config = new DocumentBuilder()
       .setTitle('Auth App')
-      .setDescription('Documentación del API para el taller 4 - Autenticación y entidades')
+      .setDescription(
+        'Documentación del API para el taller 4 - Autenticación y entidades',
+      )
       .setVersion('1.0')
       .setTermsOfService('https://example.com/terms')
       .setLicense('MIT', 'https://example.com/license')

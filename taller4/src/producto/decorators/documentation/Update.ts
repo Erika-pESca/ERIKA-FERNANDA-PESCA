@@ -1,8 +1,14 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { UpdateProductoDto } from "../../../producto/dto/update-producto.dto";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+  ApiBody,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { UpdateProductoDto } from '../../../producto/dto/update-producto.dto';
 
 export const UpdateProductoDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -10,7 +16,8 @@ export const UpdateProductoDoc = (): MethodDecorator => {
 
     ApiOperation({
       summary: 'Actualizar un producto',
-      description: 'Actualiza los datos de un producto existente en la base de datos',
+      description:
+        'Actualiza los datos de un producto existente en la base de datos',
     }),
 
     ApiParam({
@@ -33,7 +40,7 @@ export const UpdateProductoDoc = (): MethodDecorator => {
         status: HttpStatus.OK,
         data: {
           id: 1,
-          Producto: 'tuveria', 
+          Producto: 'tuveria',
           precio: 100,
           cantidad: 1,
           Proveedor: 'tuveria.sta',
@@ -45,4 +52,4 @@ export const UpdateProductoDoc = (): MethodDecorator => {
 
     DefaultErrorsDoc('Producto'),
   );
-};  
+};

@@ -23,7 +23,7 @@ export class VentasRepository {
     @InjectRepository(Facturacion)
     private facturacionRepo: Repository<Facturacion>,
   ) {}
-// Crea una nueva Venta y automáticamente crea la Factura asociada en la misma
+  // Crea una nueva Venta y automáticamente crea la Factura asociada en la misma
   async createVenta(data: CreateVentaDto) {
     // Buscar usuario
     const usuario = await this.usuarioRepo.findOne({
@@ -48,7 +48,7 @@ export class VentasRepository {
       venta: ventaGuardada,
       usuario,
     });
-// Guardar la factura
+    // Guardar la factura
     await this.facturacionRepo.save(nuevaFactura);
 
     // Retornar la venta con su factura y usuario
@@ -57,26 +57,26 @@ export class VentasRepository {
       relations: ['usuario', 'facturacion', 'ventaProductos'],
     });
   }
-// Listar todas las ventas
+  // Listar todas las ventas
   async findAll() {
     return await this.ventasRepo.find({
       // Carga las relaciones para mostrar quién compró, qué facturó y qué productos incluyó
       relations: ['usuario', 'facturacion', 'ventaProductos'],
     });
   }
-// Obtener una venta por ID
+  // Obtener una venta por ID
   async findOne(id: number) {
     return await this.ventasRepo.findOne({
       where: { id_venta: id },
       relations: ['usuario', 'facturacion', 'ventaProductos'],
     });
   }
-// Actualizar una venta
+  // Actualizar una venta
   async updateVenta(id: number, data: UpdateVentaDto) {
     await this.ventasRepo.update(id, data);
     return this.findOne(id);
   }
-// Eliminar una venta
+  // Eliminar una venta
   async deleteVenta(id: number) {
     return await this.ventasRepo.delete(id);
   }

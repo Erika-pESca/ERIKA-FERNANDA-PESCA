@@ -7,7 +7,8 @@ export function RegisterDoc() {
     ApiTags('Auth'),
     ApiOperation({
       summary: 'Registrar un nuevo usuario',
-      description: 'Crea una nueva cuenta de usuario en el sistema. Retorna un mensaje de confirmación o el usuario creado.',
+      description:
+        'Crea una nueva cuenta de usuario en el sistema. Retorna un mensaje de confirmación o el usuario creado.',
     }),
     ApiBody({
       type: RegisterDto,

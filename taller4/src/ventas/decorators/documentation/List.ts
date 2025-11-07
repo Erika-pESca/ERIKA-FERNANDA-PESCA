@@ -1,8 +1,13 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { Producto } from "../../../producto/producto.entity";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { Producto } from '../../../producto/producto.entity';
 
 export const ListVentasDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -35,7 +40,7 @@ export const ListVentasDoc = (): MethodDecorator => {
             correo: 'erika@gmail.com',
             contrasena: '123456',
             rol: 'Administrador',
-            Producto: 'mangera', 
+            Producto: 'mangera',
             precio: 100,
             cantidad: 1,
             fecha: '2022-01-01',
@@ -47,17 +52,16 @@ export const ListVentasDoc = (): MethodDecorator => {
             correo: 'andres@gmail.com',
             contrasena: '125234',
             rol: 'Usuario',
-            Producto: 'mangera', 
+            Producto: 'mangera',
             precio: 100,
             cantidad: 1,
             fecha: '2022-01-01',
           },
-
         ],
         message: 'Lista de ventas',
       },
     }),
 
-    DefaultErrorsDoc('Venta') 
+    DefaultErrorsDoc('Venta'),
   );
-}
+};

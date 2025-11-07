@@ -16,7 +16,6 @@ class VentaMinResponseDto {
 class ProductoMinResponseDto {
   @ApiProperty({ example: 5 })
   id_producto: number;
-
   @ApiProperty({ example: 'Producto A' })
   nombre: string;
 }

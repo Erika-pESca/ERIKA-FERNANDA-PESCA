@@ -1,4 +1,10 @@
-import { IsEnum, IsNumber, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { MetodoPago } from '../enums/metodo-pago.enum';
 
@@ -28,12 +34,15 @@ export class CreateFacturacionDto {
     enum: MetodoPago,
     example: MetodoPago.EFECTIVO,
   })
-  @IsEnum(MetodoPago, { message: 'El método de pago debe ser efectivo, tarjeta, transferencia u otro' })
+  @IsEnum(MetodoPago, {
+    message:
+      'El método de pago debe ser efectivo, tarjeta, transferencia u otro',
+  })
   metodo_pago!: MetodoPago;
 
   @ApiProperty({
     description: 'Total de la factura',
-    example: 125000.50,
+    example: 125000.5,
   })
   @IsNumber()
   total!: number;

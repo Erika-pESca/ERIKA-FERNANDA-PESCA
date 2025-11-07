@@ -1,7 +1,12 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 
 export const DeleteUserDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -29,7 +34,7 @@ export const DeleteUserDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Usuario') 
+    DefaultErrorsDoc('Usuario'),
   );
-}
-    // Aquí se agregan las respuestas de error comunes
+};
+// Aquí se agregan las respuestas de error comunes

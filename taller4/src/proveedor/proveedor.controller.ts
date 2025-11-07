@@ -1,19 +1,35 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { ProveedorService } from './proveedor.service';
 import { Proveedor } from './proveedor.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { DefaultErrorsDoc} from '../common/decorators/defaultErrorsDoc';
+import { DefaultErrorsDoc } from '../common/decorators/defaultErrorsDoc';
 import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
 import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc';
 import { DefaultFindOneDoc } from '../common/decorators/DefaultFindOneDoc';
 import { DefaultUpdateDoc } from '../common/decorators/DefaultUpdateDoc';
 import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
-import { ProveedorSingularExample, ProveedorArrayExample } from './docs/ProveedorExample';
+import {
+  ProveedorSingularExample,
+  ProveedorArrayExample,
+} from './docs/ProveedorExample';
 /**
  * Controlador encargado de gestionar las operaciones relacionadas con los proveedores.
- * 
+ *
  * Este controlador maneja las solicitudes HTTP relacionadas con la creación,
  * consulta, actualización y eliminación de proveedores.
+<<<<<<< HEAD
+=======
+ *
+ * Se conecta con el servicio `ProveedorService` para ejecutar la lógica de negocio.
+>>>>>>> 55e99079 (Guardo cambios locales antes del rebase)
  */
 @ApiTags('Proveedores')
 @Controller('proveedores')

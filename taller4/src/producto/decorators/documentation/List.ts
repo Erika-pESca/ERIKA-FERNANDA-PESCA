@@ -1,7 +1,12 @@
-import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
 
 export const ListProductoDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -29,7 +34,7 @@ export const ListProductoDoc = (): MethodDecorator => {
         data: [
           {
             id: 1,
-            Producto: 'tuveria', 
+            Producto: 'tuveria',
             precio: 100,
             cantidad: 1,
             Proveedor: 'tuveria.sta',
@@ -37,18 +42,17 @@ export const ListProductoDoc = (): MethodDecorator => {
           },
           {
             id: 2,
-            Producto: 'mangera', 
+            Producto: 'mangera',
             precio: 100,
             cantidad: 1,
             Proveedor: 'Stanley',
             Categoria: 'riego',
           },
-
         ],
         message: 'Lista de productos',
       },
     }),
 
-    DefaultErrorsDoc('Producto') 
+    DefaultErrorsDoc('Producto'),
   );
-}
+};

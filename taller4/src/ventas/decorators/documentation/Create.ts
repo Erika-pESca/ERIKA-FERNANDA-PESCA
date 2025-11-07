@@ -1,10 +1,16 @@
-import { Categoria } from "../../../categoria/categoria.entity"
-    import { applyDecorators, HttpStatus } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiBearerAuth, ApiBody, ApiParam } from "@nestjs/swagger";
-import { DefaultResponse } from "../../../common/interfaces/IResponse";
-import { DefaultErrorsDoc } from "../../../common/decorators/defaultErrorsDoc";
-import { CreateVentaDto } from "../../dto/create-venta.dto";
-import { Producto } from "../../../producto/producto.entity";
+import { Categoria } from '../../../categoria/categoria.entity';
+import { applyDecorators, HttpStatus } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
+import { DefaultResponse } from '../../../common/interfaces/IResponse';
+import { DefaultErrorsDoc } from '../../../common/decorators/defaultErrorsDoc';
+import { CreateVentaDto } from '../../dto/create-venta.dto';
+import { Producto } from '../../../producto/producto.entity';
 
 export const CreateVentaDoc = (): MethodDecorator => {
   return applyDecorators(
@@ -36,8 +42,8 @@ export const CreateVentaDoc = (): MethodDecorator => {
         data: {
           id: 1,
           nombre: 'Erika',
-          Categoria: 'riego',  
-          Producto: 'mangera', 
+          Categoria: 'riego',
+          Producto: 'mangera',
           precio: 100,
           cantidad: 1,
           fecha: '2022-01-01',
@@ -46,6 +52,6 @@ export const CreateVentaDoc = (): MethodDecorator => {
       },
     }),
 
-    DefaultErrorsDoc('Venta') 
+    DefaultErrorsDoc('Venta'),
   );
 };

@@ -5,7 +5,7 @@ import { Proveedor } from './proveedor.entity';
 
 /**
  * Servicio encargado de gestionar la lógica de negocio de los proveedores.
- * 
+ *
  * Este servicio implementa las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
  * sobre la entidad `Proveedor`. Se comunica directamente con la base de datos.
  */
@@ -21,7 +21,9 @@ export class ProveedorService {
    * @returns Una promesa con la lista de proveedores y sus productos.
    */
   async findAll(): Promise<any[]> {
-    const proveedores = await this.proveedorRepository.find({ relations: ['productos'] });
+    const proveedores = await this.proveedorRepository.find({
+      relations: ['productos'],
+    });
     return proveedores.map((p) => ({
       ...p,
       correo: p.getDecryptedEmail(),
@@ -59,7 +61,9 @@ export class ProveedorService {
    */
   async update(id: number, proveedor: Proveedor): Promise<Proveedor | null> {
     await this.proveedorRepository.update(id, proveedor);
-    const actualizado = await this.proveedorRepository.findOneBy({ id_proveedor: id });
+    const actualizado = await this.proveedorRepository.findOneBy({
+      id_proveedor: id,
+    });
     if (actualizado) {
       actualizado.correo = actualizado.getDecryptedEmail();
     }

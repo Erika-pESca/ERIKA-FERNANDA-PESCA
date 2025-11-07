@@ -7,7 +7,8 @@ export function LoginDoc() {
     ApiTags('Auth'),
     ApiOperation({
       summary: 'Iniciar sesión',
-      description: 'Permite que un usuario inicie sesión y reciba un token JWT válido para autenticación.',
+      description:
+        'Permite que un usuario inicie sesión y reciba un token JWT válido para autenticación.',
     }),
     ApiBody({
       type: LoginDto,

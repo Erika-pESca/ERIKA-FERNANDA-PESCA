@@ -1,5 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsPositive, IsString, MaxLength, IsNumber } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsPositive,
+  IsString,
+  MaxLength,
+  IsNumber,
+} from 'class-validator';
 
 /**
  * Create Producto DTO
@@ -29,7 +36,8 @@ export class CreateProductoDto {
     name: 'descripcion',
     type: String,
     description: 'Descripción detallada del producto (opcional)',
-    example: 'Taladro percutor de 550W con velocidad variable y reversa, ideal para trabajos de bricolaje.',
+    example:
+      'Taladro percutor de 550W con velocidad variable y reversa, ideal para trabajos de bricolaje.',
   })
   @IsOptional()
   @IsString()

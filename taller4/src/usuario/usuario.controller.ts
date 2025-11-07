@@ -17,98 +17,54 @@ import { DeleteUserDoc } from './decorators/documentation/Delete';
 import { GetAllUsersDoc } from './decorators/documentation/GetAll';
 import { UpdateUserDoc } from './decorators/documentation/Update';
 import { ListUsersDoc } from './decorators/documentation/List';
-import { Usuario } from './usuario.entity';
+//import { DefaultErrorsDoc } from 'src/common/decorators/defaultErrorsDoc';
 
-/**
- * Controlador responsable de manejar las operaciones relacionadas con los usuarios.
- *
- * Define las rutas HTTP y enlaza las peticiones con los métodos del servicio `UsuarioService`.
- *
- * @controller UsuarioController
- * @route /usuario
- */
-@Controller('usuario')
+@Controller('usuario') //definimos la ruta base para este controlador
 export class UsuarioController {
-  /**
-   * Inyecta el servicio de usuarios para manejar la lógica de negocio.
-   * @param userService Servicio encargado de las operaciones CRUD de usuario.
-   */
   constructor(private readonly userService: UsuarioService) {}
 
-  /**
-   * Crea un nuevo usuario en el sistema.
-   *
-   * @route POST /usuario/register
-   * @param body Datos del usuario a crear (CreateUsuarioDto).
-   * @returns El usuario creado.
-   */
+  // @DefaultErrorsDoc()
+  // Crear usuario
   @Post('register')
   @CreateUserDoc()
-  async createUser(@Body() body: CreateUsuarioDto): Promise<Usuario> {
+  createUser(@Body() body: CreateUsuarioDto) {
     return this.userService.createUser(body);
   }
 
-  /**
-   * Obtiene la lista de todos los usuarios registrados.
-   *
-   * @route GET /usuario/list
-   * @returns Lista de usuarios.
-   */
   @ListUsersDoc()
+  // Listar usuarios
   @Get('list')
-  async listUsers(): Promise<Usuario[]> {
+  listUsers() {
     return this.userService.listUsers();
   }
 
-  /**
-   * Obtiene un usuario específico por su ID.
-   *
-   * @route GET /usuario/:id
-   * @param id Identificador numérico del usuario.
-   * @throws NotFoundException Si el usuario no existe.
-   * @returns El usuario encontrado.
-   */
   @GetAllUsersDoc()
+  // Obtener usuario por ID
   @Get(':id')
-  async getUser(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
+  async getUser(@Param('id', ParseIntPipe) id: number) {
     const user = await this.userService.getUser(id);
+    // Manejo de errores: Si el Servicio devuelve null/undefined
     if (!user) throw new NotFoundException(`Usuario ${id} no encontrado`);
     return user;
   }
 
-  /**
-   * Actualiza los datos de un usuario existente.
-   *
-   * @route PATCH /usuario/:id
-   * @param id Identificador del usuario a actualizar.
-   * @param body Datos a actualizar (UpdateUsuarioDto).
-   * @throws NotFoundException Si el usuario no existe.
-   * @returns El usuario actualizado.
-   */
   @UpdateUserDoc()
+  // Actualizar usuario
   @Patch(':id')
   async updateUser(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: UpdateUsuarioDto,
-  ): Promise<Usuario> {
+    @Body() body: UpdateUsuarioDto, //// El Body se valida con UpdateUsuarioDto todos los campos opcionales
+  ) {
     const updated = await this.userService.updateUser(id, body);
+    // verifica si la actualización fue exitosa
     if (!updated) throw new NotFoundException(`Usuario ${id} no encontrado`);
     return updated;
   }
 
-  /**
-   * Elimina un usuario del sistema.
-   *
-   * @route DELETE /usuario/:id
-   * @param id Identificador del usuario a eliminar.
-   * @throws NotFoundException Si el usuario no existe.
-   * @returns Mensaje de confirmación de eliminación.
-   */
   @DeleteUserDoc()
+  // Eliminar usuario
   @Delete(':id')
-  async deleteUser(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<{ message: string }> {
+  async deleteUser(@Param('id', ParseIntPipe) id: number) {
     const result = await this.userService.deleteUser(id);
     if (!result) throw new NotFoundException(`Usuario ${id} no encontrado`);
     return { message: `Usuario ${id} eliminado correctamente` };

@@ -23,8 +23,12 @@ describe('ProveedorController', () => {
     findAll: jest.fn().mockResolvedValue([mockProveedor]),
     findOne: jest.fn().mockResolvedValue(mockProveedor),
     create: jest.fn().mockResolvedValue(mockProveedor),
-    update: jest.fn().mockResolvedValue({ ...mockProveedor, nombre: 'Actualizado' }),
-    remove: jest.fn().mockResolvedValue({ message: 'Proveedor eliminado correctamente' }),
+    update: jest
+      .fn()
+      .mockResolvedValue({ ...mockProveedor, nombre: 'Actualizado' }),
+    remove: jest
+      .fn()
+      .mockResolvedValue({ message: 'Proveedor eliminado correctamente' }),
   };
 
   //Configurar un módulo de testing con el controlador y el mock del servicio

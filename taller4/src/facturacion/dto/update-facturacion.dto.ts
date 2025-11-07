@@ -6,4 +6,3 @@ import { CreateFacturacionDto } from './create-facturacion.dto';
  * Hereda los campos de CreateFacturacionDto pero los vuelve opcionales.
  */
 export class UpdateFacturacionDto extends PartialType(CreateFacturacionDto) {}
-

@@ -1,16 +1,27 @@
-import { 
-    Controller, Post, Get, Delete, Param, Body, HttpStatus, 
-    UsePipes, ValidationPipe, ParseIntPipe 
+import {
+  Controller,
+  Post,
+  Get,
+  Delete,
+  Param,
+  Body,
+  HttpStatus,
+  UsePipes,
+  ValidationPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiTags, ApiParam } from '@nestjs/swagger';
-import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses'; 
+import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
 import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
 import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc';
 import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
 import { VentaProductoService } from './venta_producto.service';
 import { VentaProducto } from './venta_producto.entity';
 import { VentaProductoResponseDto } from './dto/venta-producto-response.dto';
-import { VentaProductoSingularExample, VentaProductoArrayExample } from './docs/VentaProductoExample';
+import {
+  VentaProductoSingularExample,
+  VentaProductoArrayExample,
+} from './docs/VentaProductoExample';
 /**
  * Controlador encargado de gestionar los productos asociados a una venta.
  * Permite agregar, listar y eliminar productos dentro de una venta específica.
@@ -78,7 +89,7 @@ export class VentaProductoController {
     name: 'id',
     description: 'ID numérico del registro VentaProducto a eliminar',
     type: Number,
-    example: 1
+    example: 1,
   })
   async remove(@Param('id') id: number) {
     await this.ventaProductoService.remove(id);
