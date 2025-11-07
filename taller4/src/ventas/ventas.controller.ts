@@ -1,7 +1,15 @@
 // src/ventas/ventas.controller.ts
-import { Controller, Post, Get, Delete, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Delete,
+  Patch,
+  Param,
+  Body,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { VentasService } from './ventas.service';
-import { Ventas } from './ventas.entity';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { CreateVentaDoc } from './decorators/documentation/Create';
@@ -9,35 +17,96 @@ import { DeleteVentaDoc } from './decorators/documentation/Delete';
 import { GetAllVentasDoc } from './decorators/documentation/GetAll';
 import { ListVentasDoc } from './decorators/documentation/List';
 import { UpdateVentaDoc } from './decorators/documentation/Update';
+import { Ventas } from './ventas.entity';
 
+/**
+ * Controlador responsable de manejar las rutas relacionadas con las ventas.
+ *
+ * Define los endpoints para crear, listar, obtener, actualizar y eliminar ventas.
+ *
+ * @controller VentasController
+ * @route /ventas
+ */
 @Controller('ventas')
 export class VentasController {
+  /**
+   * Inyecta el servicio de ventas para manejar la lógica de negocio.
+   *
+   * @param ventasService Servicio que gestiona las operaciones sobre las ventas.
+   */
   constructor(private readonly ventasService: VentasService) {}
 
-@CreateVentaDoc()
+  /**
+   * Crea una nueva venta en el sistema.
+   *
+   * @route POST /ventas/crear
+   * @param datos Datos de la venta (CreateVentaDto).
+   * @returns La venta creada.
+   */
+  @CreateVentaDoc()
   @Post('crear')
-  async crear(@Body() datos: CreateVentaDto) {
+  async crear(@Body() datos: CreateVentaDto): Promise<Ventas> {
     return this.ventasService.createVenta(datos);
   }
-@ListVentasDoc()
- @Get('listar')
-async listar() {
-  // Llamamos al método que devuelve todas las ventas
-  return this.ventasService.updateVenta(0, {}); // pasar cualquier valor temporal
-}
-@GetAllVentasDoc()
+
+  /**
+   * Lista todas las ventas registradas.
+   *
+   *Este método actualmente usa `updateVenta(0, {})` como temporal.
+   *
+   * @route GET /ventas/listar
+   * @returns Lista de ventas registradas.
+   */
+  @ListVentasDoc()
+  @Get('listar')
+  async listar(): Promise<Ventas[]> {
+    // Llamamos al método que devuelve todas las ventas
+    return this.ventasService.findAll();
+  }
+
+  /**
+   * Obtiene una venta específica por su ID.
+   *
+   * @route GET /ventas/:id
+   * @param id Identificador numérico de la venta.
+   * @returns La venta encontrada.
+   */
+  @GetAllVentasDoc()
   @Get(':id')
-  async obtener(@Param('id', ParseIntPipe) id: number) {
+  async obtener(@Param('id', ParseIntPipe) id: number): Promise<Ventas | null> {
     return this.ventasService.getVenta(id);
   }
-@UpdateVentaDoc()
+
+  /**
+   * Actualiza los datos de una venta existente.
+   *
+   * @route PATCH /ventas/:id
+   * @param id Identificador de la venta a actualizar.
+   * @param body Datos de actualización (UpdateVentaDto).
+   * @returns La venta actualizada.
+   */
+  @UpdateVentaDoc()
   @Patch(':id')
-  async actualizar(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateVentaDto) {
+  async actualizar(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateVentaDto,
+  ): Promise<Ventas | null> {
     return this.ventasService.updateVenta(id, body);
   }
-@DeleteVentaDoc()
+
+  /**
+   * Elimina una venta por su ID.
+   *
+   * @route DELETE /ventas/:id
+   * @param id Identificador numérico de la venta.
+   * @returns Mensaje de confirmación o resultado de la eliminación.
+   */
+  @DeleteVentaDoc()
   @Delete(':id')
-  async eliminar(@Param('id', ParseIntPipe) id: number) {
-    return this.ventasService.deleteVenta(id); 
+  async eliminar(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ message: string }> {
+    await this.ventasService.deleteVenta(id);
+    return { message: `Venta ${id} eliminada correctamente` };
   }
 }
