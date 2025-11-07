@@ -68,19 +68,19 @@ describe('VentaProductoService', () => {
   describe('agregarProductoAVenta', () => {
     it('lanza NotFoundException si la venta no existe', async () => {
       ventaRepo.findOne!.mockResolvedValue(null);
-      await expect(service.agregarProductoAVenta(1, 1, 1)).rejects.toThrow(new NotFoundException('Venta no encontrada'));
+      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(new NotFoundException('Venta no encontrada'));
     });
 
     it('lanza NotFoundException si el producto no existe', async () => {
       ventaRepo.findOne!.mockResolvedValue(ventaMock);
       productoRepo.findOne!.mockResolvedValue(null);
-      await expect(service.agregarProductoAVenta(1, 1, 1)).rejects.toThrow(new NotFoundException('Producto no encontrado'));
+      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(new NotFoundException('Producto no encontrado'));
     });
 
     it('lanza NotFoundException si la cantidad supera el stock', async () => {
       ventaRepo.findOne!.mockResolvedValue(ventaMock);
       productoRepo.findOne!.mockResolvedValue({ ...productoMock, stock: 5 });
-      await expect(service.agregarProductoAVenta(1, 1, 10)).rejects.toThrow(
+      await expect(service.addProductToSale(1, 1, 10)).rejects.toThrow(
         new NotFoundException('Stock insuficiente. Disponible: 5'),
       );
     });
@@ -92,7 +92,7 @@ describe('VentaProductoService', () => {
       ventaProductoRepo.save!.mockImplementation(async (dto) => dto);
       productoRepo.save!.mockResolvedValue(true);
 
-      const result = await service.agregarProductoAVenta(1, 1, 5);
+      const result = await service.addProductToSale(1, 1, 5);
 
       expect(result.subtotal).toBe(500);
       expect(result.cantidad).toBe(5);
@@ -104,7 +104,7 @@ describe('VentaProductoService', () => {
   describe('listarPorVenta', () => {
     it('retorna los productos de una venta', async () => {
       ventaProductoRepo.find!.mockResolvedValue([productoMock]);
-      const result = await service.listarPorVenta(1);
+      const result = await service.findBySale(1);
       expect(result).toEqual([productoMock]);
     });
   });
@@ -113,13 +113,13 @@ describe('VentaProductoService', () => {
   describe('eliminar', () => {
     it('lanza NotFoundException si el registro no existe', async () => {
       ventaProductoRepo.findOne!.mockResolvedValue(null);
-      await expect(service.eliminar(1)).rejects.toThrow(new NotFoundException('Registro no encontrado'));
+      await expect(service.remove(1)).rejects.toThrow(new NotFoundException('Registro no encontrado'));
     });
 
     it('elimina el registro si existe', async () => {
       ventaProductoRepo.findOne!.mockResolvedValue({ id_venta_producto: 1 });
       ventaProductoRepo.delete!.mockResolvedValue({ affected: 1 });
-      const result = await service.eliminar(1);
+      const result = await service.remove(1);
       expect(result).toEqual({ affected: 1 });
     });
   });

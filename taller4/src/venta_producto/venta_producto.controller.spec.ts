@@ -10,9 +10,10 @@ describe('VentaProductoController', () => {
 
   beforeEach(async () => {
     const mockService = {
-      agregarProductoAVenta: jest.fn(),
-      listarPorVenta: jest.fn(),
-      eliminar: jest.fn(),
+      findBySale: jest.fn(),
+      addProductToSale: jest.fn(),
+      listProducts: jest.fn(),
+      remove: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -42,9 +43,9 @@ describe('VentaProductoController', () => {
       producto: { id_producto: 5, nombre: 'Producto A' } as any,
     };
 
-    jest.spyOn(service, 'agregarProductoAVenta').mockResolvedValue(mockResult);
+    jest.spyOn(service, 'addProductToSale').mockResolvedValue(mockResult);
 
-    const result = await controller.agregarProducto(body);
+    const result = await controller.addProduct(body);
 
     expect(result).toEqual({
       status: HttpStatus.CREATED,
@@ -53,7 +54,7 @@ describe('VentaProductoController', () => {
     });
 
     //el servicio fue llamado con los parámetros correctos
-    expect(service.agregarProductoAVenta).toHaveBeenCalledWith(1, 5, 3);
+    expect(service.addProductToSale).toHaveBeenCalledWith(1, 5, 3);
   });
 
   // Listar productos de una venta específica
@@ -70,9 +71,9 @@ describe('VentaProductoController', () => {
       },
     ];
 
-    jest.spyOn(service, 'listarPorVenta').mockResolvedValue(mockList);
+    jest.spyOn(service, 'findBySale').mockResolvedValue(mockList);
 
-    const result = await controller.listar(idVenta);
+    const result = await controller.listProducts(idVenta);
 
     expect(result).toEqual({
       status: HttpStatus.OK,
@@ -80,7 +81,7 @@ describe('VentaProductoController', () => {
       message: 'Productos listados correctamente',
     });
 
-    expect(service.listarPorVenta).toHaveBeenCalledWith(idVenta);
+    expect(service.findBySale).toHaveBeenCalledWith(idVenta);
   });
 
   // Eliminar un producto de una venta
@@ -88,9 +89,9 @@ describe('VentaProductoController', () => {
     const id = 1;
 
     // resultado compatible con DeleteResult
-    jest.spyOn(service, 'eliminar').mockResolvedValue({ affected: 1 } as any);
+    jest.spyOn(service, 'remove').mockResolvedValue({ affected: 1 } as any);
 
-    const result = await controller.eliminar(id);
+    const result = await controller.remove(id);
 
     expect(result).toEqual({
       status: HttpStatus.OK,
@@ -98,6 +99,6 @@ describe('VentaProductoController', () => {
       message: 'Producto eliminado correctamente de la venta',
     });
 
-    expect(service.eliminar).toHaveBeenCalledWith(id);
+    expect(service.remove).toHaveBeenCalledWith(id);
   });
 });

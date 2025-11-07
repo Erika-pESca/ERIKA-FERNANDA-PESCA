@@ -1,3 +1,7 @@
+
+/*
+Ejemplos de datos usados en la documentación Swagger para mostrar cómo luce una categoria (singular y en lista)
+*/
 export const CategoriaSingularExample = {
     id_categoria: 10,
     nombre: 'Tornillos',

@@ -9,11 +9,13 @@ describe('CategoriaController', () => {
   let controller: CategoriaController;
   let service: CategoriaService;
 
+  // Configura el módulo de pruebas antes de cada test
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CategoriaController],
       providers: [
         {
+          // Se usa un mock del servicio para simular las funciones
           provide: CategoriaService,
           useValue: {
             create: jest.fn(),
@@ -30,10 +32,12 @@ describe('CategoriaController', () => {
     service = module.get<CategoriaService>(CategoriaService);
   });
 
+  // Verifica que el controlador se haya definido correctamente
   it('debería estar definido', () => {
     expect(controller).toBeDefined();
   });
 
+  // Prueba la creación de una categoría
   it('debería crear una categoría', async () => {
     const dto: CreateCategoriaDto = { nombre: 'Comida', descripcion: 'Platillos típicos' };
     const mockCategoria: Categoria = { id_categoria: 1, ...dto, productos: [] };
@@ -45,6 +49,7 @@ describe('CategoriaController', () => {
     expect(service.create).toHaveBeenCalledWith(dto);
   });
 
+  // Prueba obtener todas las categorías
   it('debería retornar todas las categorías', async () => {
     const mockCategorias: Categoria[] = [{ id_categoria: 1, nombre: 'Bebidas', productos: [] }];
 
@@ -55,6 +60,7 @@ describe('CategoriaController', () => {
     expect(service.findAll).toHaveBeenCalled();
   });
 
+  // Prueba obtener una categoría por ID
   it('debería retornar una categoría por ID', async () => {
     const id = 1;
     const mockCategoria: Categoria = { id_categoria: id, nombre: 'Postres', productos: [] };
@@ -66,6 +72,7 @@ describe('CategoriaController', () => {
     expect(service.findOne).toHaveBeenCalledWith(id);
   });
 
+  // Prueba actualizar una categoría
   it('debería actualizar una categoría', async () => {
     const id = 1;
     const dto: UpdateCategoriaDto = { nombre: 'Comidas Rápidas' };
@@ -78,6 +85,7 @@ describe('CategoriaController', () => {
     expect(service.update).toHaveBeenCalledWith(id, dto);
   });
 
+  // Prueba eliminar una categoría
   it('debería eliminar una categoría', async () => {
     const id = 1;
     const mockCategoria: Categoria = { id_categoria: id, nombre: 'Eliminar', productos: [] };

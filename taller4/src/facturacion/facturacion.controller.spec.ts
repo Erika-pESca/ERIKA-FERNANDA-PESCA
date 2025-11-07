@@ -11,6 +11,7 @@ describe('FacturacionController', () => {
   let service: FacturacionService;
 
   beforeEach(async () => {
+    // Crea un servicio simulado (mock) con las funciones básicas
     const mockService = {
       create: jest.fn(),
       findAll: jest.fn(),
@@ -19,6 +20,7 @@ describe('FacturacionController', () => {
       remove: jest.fn(),
     };
 
+    // Crea el módulo de prueba con el controlador y el mock del servicio
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FacturacionController],
       providers: [{ provide: FacturacionService, useValue: mockService }],
@@ -28,10 +30,12 @@ describe('FacturacionController', () => {
     service = module.get<FacturacionService>(FacturacionService);
   });
 
+  // Verifica que el controlador esté definido
   it('debería estar definido', () => {
     expect(controller).toBeDefined();
   });
 
+  // Prueba la creación de una factura
   it('debería crear una factura', async () => {
     const dto: CreateFacturacionDto = {
       numero_factura: 'FAC-2025-001',
@@ -57,6 +61,7 @@ describe('FacturacionController', () => {
     expect(service.create).toHaveBeenCalledWith(dto);
   });
 
+  // Prueba la obtención de todas las facturas
   it('debería listar todas las facturas', async () => {
     const mockList: Facturacion[] = [
       {
@@ -75,6 +80,7 @@ describe('FacturacionController', () => {
     expect(service.findAll).toHaveBeenCalled();
   });
 
+  // Prueba la obtención de una factura por ID
   it('debería obtener una factura por ID', async () => {
     const id = 1;
     const mockFactura: Facturacion = {
@@ -92,6 +98,7 @@ describe('FacturacionController', () => {
     expect(service.findOne).toHaveBeenCalledWith(id);
   });
 
+  // Prueba la actualización de una factura
   it('debería actualizar una factura', async () => {
     const id = 1;
     const dto: UpdateFacturacionDto = {
@@ -114,9 +121,9 @@ describe('FacturacionController', () => {
     expect(service.update).toHaveBeenCalledWith(id, dto);
   });
 
+  // Prueba la eliminación de una factura
   it('debería eliminar una factura', async () => {
     const id = 1;
-    const mockResponse = undefined; 
 
     jest.spyOn(service, 'remove').mockResolvedValue({} as Facturacion);
 

@@ -1,4 +1,7 @@
-// src/facturacion/docs/FacturacionExample.ts
+
+/*
+Ejemplos de datos usados en la documentación Swagger para mostrar cómo luce una factura (singular y en lista)
+*/
 
 export const FacturacionSingularExample = {
     id_facturacion: 1,

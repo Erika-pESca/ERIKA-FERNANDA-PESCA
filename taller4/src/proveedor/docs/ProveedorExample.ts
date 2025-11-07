@@ -1,3 +1,7 @@
+
+/*
+Ejemplos de datos usados en la documentación Swagger para mostrar cómo luce un proveedor (singular y en lista)
+*/
 export const ProveedorSingularExample = {
     id_proveedor: 1,
     nombre: 'Distribuciones La Española',

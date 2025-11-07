@@ -31,13 +31,13 @@ export class FacturacionController {
    * @returns La factura creada.
    */
   @Post()
-   @UsePipes(new ValidationPipe({ whitelist: true }))
-   @DefaultCreateDoc(
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  @DefaultCreateDoc(
     'Facturación', 
     CreateFacturacionDto, 
     FacturacionResponseDto, 
     FacturacionSingularExample
-   )
+  )
   create(@Body() dto: CreateFacturacionDto) {
     return this.service.create(dto);
   }
@@ -47,11 +47,11 @@ export class FacturacionController {
    * @returns Un arreglo con todas las facturas almacenadas.
    */
   @Get()
-   @DefaultFindAllDoc(
-     'Facturación', 
-     FacturacionResponseDto, 
-     FacturacionArrayExample
-   )
+  @DefaultFindAllDoc(
+    'Facturación', 
+    FacturacionResponseDto, 
+    FacturacionArrayExample
+  )
   findAll() {
     return this.service.findAll();
   }
@@ -62,12 +62,12 @@ export class FacturacionController {
    * @returns La factura correspondiente si existe.
    */
   @Get(':id')
-   @DefaultFindOneDoc(
-     'Facturación', 
-     FacturacionResponseDto, 
-     FacturacionSingularExample
+  @DefaultFindOneDoc(
+    'Facturación', 
+    FacturacionResponseDto, 
+    FacturacionSingularExample
    )
-   @ApiParam({ name: 'id', description: 'ID de la factura', example: 1 })
+  @ApiParam({ name: 'id', description: 'ID de la factura', example: 1 })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.findOne(id);
   }
@@ -79,14 +79,14 @@ export class FacturacionController {
    * @returns La factura actualizada.
    */
   @Patch(':id')
-   @UsePipes(new ValidationPipe({ whitelist: true }))
-   @DefaultUpdateDoc(
-     'Facturación', 
-     UpdateFacturacionDto, // DTO de Entrada
-     FacturacionResponseDto, // DTO de Salida
-     FacturacionSingularExample
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  @DefaultUpdateDoc(
+    'Facturación', 
+    UpdateFacturacionDto, // DTO de Entrada
+    FacturacionResponseDto, // DTO de Salida
+    FacturacionSingularExample
    )
-   @ApiParam({ name: 'id', description: 'ID de la factura a actualizar', example: 1 })
+  @ApiParam({ name: 'id', description: 'ID de la factura a actualizar', example: 1 })
   update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFacturacionDto) {
     return this.service.update(id, dto);
   }

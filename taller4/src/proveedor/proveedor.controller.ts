@@ -14,8 +14,6 @@ import { ProveedorSingularExample, ProveedorArrayExample } from './docs/Proveedo
  * 
  * Este controlador maneja las solicitudes HTTP relacionadas con la creación,
  * consulta, actualización y eliminación de proveedores.
- * 
- * Se conecta con el servicio `ProveedorService` para ejecutar la lógica de negocio.
  */
 @ApiTags('Proveedores')
 @Controller('proveedores')

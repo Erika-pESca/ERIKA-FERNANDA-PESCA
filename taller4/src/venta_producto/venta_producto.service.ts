@@ -5,63 +5,90 @@ import { VentaProducto } from './venta_producto.entity';
 import { Ventas } from '../ventas/ventas.entity';
 import { Producto } from '../producto/producto.entity';
 
+/**
+ * Servicio de VentaProducto
+ * Contiene la lógica de negocio relacionada con los productos asociados a una venta,
+ * incluyendo agregar productos, listarlos y eliminarlos.
+ */
 @Injectable()
 export class VentaProductoService {
   constructor(
     @InjectRepository(VentaProducto)
-    private readonly ventaProductoRepo: Repository<VentaProducto>,
+    private readonly saleProductRepo: Repository<VentaProducto>,
 
     @InjectRepository(Ventas)
-    private readonly ventaRepo: Repository<Ventas>,
+    private readonly saleRepo: Repository<Ventas>,
 
     @InjectRepository(Producto)
-    private readonly productoRepo: Repository<Producto>,
+    private readonly productRepo: Repository<Producto>,
   ) {}
 
-  // 🔹 Crear un nuevo registro en venta_producto
-  async agregarProductoAVenta(idVenta: number, idProducto: number, cantidad: number) {
-    const venta = await this.ventaRepo.findOne({ where: { id_venta: idVenta } });
-    if (!venta) throw new NotFoundException('Venta no encontrada');
+  /**
+   * Agrega un producto a una venta específica.
+   * Valida que la venta y el producto existan, y que haya suficiente stock.
+   * Luego crea el registro en la tabla intermedia venta_producto y actualiza el stock del producto.
+   * 
+   * @param saleId - ID de la venta
+   * @param productId - ID del producto
+   * @param quantity - Cantidad de productos a agregar
+   * @returns El nuevo registro de venta-producto creado
+   * @throws NotFoundException si la venta o el producto no existen o si no hay stock suficiente
+   */
+  async addProductToSale(saleId: number, productId: number, quantity: number) {
+    const sale = await this.saleRepo.findOne({ where: { id_venta: saleId } });
+    if (!sale) throw new NotFoundException('Venta no encontrada');
 
-    const producto = await this.productoRepo.findOne({ where: { id_producto: idProducto } });
-    if (!producto) throw new NotFoundException('Producto no encontrado');
+    const product = await this.productRepo.findOne({ where: { id_producto: productId } });
+    if (!product) throw new NotFoundException('Producto no encontrado');
 
-    if (cantidad > producto.stock) {
-      throw new NotFoundException(`Stock insuficiente. Disponible: ${producto.stock}`);
+    if (quantity > product.stock) {
+      throw new NotFoundException(`Stock insuficiente. Disponible: ${product.stock}`);
     }
 
     // Calcular subtotal
-    const subtotal = Number(producto.precio) * cantidad;
+    const subtotal = Number(product.precio) * quantity;
 
     // Crear el registro
-    const ventaProducto = this.ventaProductoRepo.create({
-      cantidad,
-      precio_unitario: producto.precio,
+    const saleProduct = this.saleProductRepo.create({
+      cantidad: quantity,
+      precio_unitario: product.precio,
       subtotal,
-      venta,
-      producto,
+      venta: sale,
+      producto: product,
     });
 
-    // Guardar y actualizar stock
-    const nuevoRegistro = await this.ventaProductoRepo.save(ventaProducto);
-    producto.stock -= cantidad;
-    await this.productoRepo.save(producto);
+    // Guardar el registro y actualizar el stock
+    const newRecord = await this.saleProductRepo.save(saleProduct);
+    product.stock -= quantity;
+    await this.productRepo.save(product);
 
-    return nuevoRegistro;
+    return newRecord;
   }
 
-  // 🔹 Listar productos por venta
-  async listarPorVenta(idVenta: number) {
-    return await this.ventaProductoRepo.find({
-      where: { venta: { id_venta: idVenta } },
+  /**
+   * Lista todos los productos asociados a una venta específica.
+   * Incluye relaciones con la entidad producto y venta.
+   * 
+   * @param saleId - ID de la venta
+   * @returns Lista de productos vinculados a la venta
+   */
+  async findBySale(saleId: number) {
+    return await this.saleProductRepo.find({
+      where: { venta: { id_venta: saleId } },
       relations: ['producto', 'venta'],
     });
   }
 
-  // 🔹 Eliminar un producto de una venta
-  async eliminar(id: number) {
-    const existe = await this.ventaProductoRepo.findOne({ where: { id_venta_producto: id } });
-    if (!existe) throw new NotFoundException('Registro no encontrado');
-    return await this.ventaProductoRepo.delete(id);
+  /**
+   * Elimina un registro de venta-producto por su ID.
+   * 
+   * @param id - ID del registro venta-producto
+   * @returns Resultado de la operación de eliminación
+   * @throws NotFoundException si el registro no existe
+   */
+  async remove(id: number) {
+    const existingRecord = await this.saleProductRepo.findOne({ where: { id_venta_producto: id } });
+    if (!existingRecord) throw new NotFoundException('Registro no encontrado');
+    return await this.saleProductRepo.delete(id);
   }
 }

@@ -1,4 +1,7 @@
 
+/*
+Ejemplos de datos usados en la documentación Swagger para mostrar cómo luce una venta_producto (singular y en lista)
+*/
 export const VentaProductoSingularExample = {
     id_venta_producto: 1,
     cantidad: 3,

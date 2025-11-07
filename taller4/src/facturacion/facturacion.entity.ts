@@ -21,19 +21,19 @@ export class Facturacion {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   total: number;
 
-  // 🔹 Esta relación es la DUEÑA del OneToOne
- @OneToOne(() => Ventas, (venta) => venta.facturacion, {
+  //Esta relación es la DUEÑA del OneToOne
+  @OneToOne(() => Ventas, (venta) => venta.facturacion, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 })
-@JoinColumn({ name: 'id_venta' }) // Este lado mantiene la FK
-venta: Ventas;
-
+  @JoinColumn({ name: 'id_venta' }) // Este lado mantiene la FK
+  venta: Ventas;
 
   @ManyToOne(() => Usuario, (usuario) => usuario.facturas, {
     onDelete: 'SET NULL',
     nullable: true,
   })
+
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 }

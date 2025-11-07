@@ -26,15 +26,15 @@ export class VentaProductoController {
    * @returns Confirmación del producto agregado a la venta.
    */
   @Post()
-   @UsePipes(new ValidationPipe({ transform: true })) 
-   @DefaultCreateDoc(
-     'VentaProducto', 
-     VentaProductoResponseDto,
-     VentaProducto, 
-     VentaProductoSingularExample 
-   )
-  async agregarProducto(@Body() body: { idVenta: number; idProducto: number; cantidad: number }) {
-    const productoAgregado = await this.ventaProductoService.agregarProductoAVenta(
+  @UsePipes(new ValidationPipe({ transform: true })) 
+  @DefaultCreateDoc(
+    'VentaProducto', 
+    VentaProductoResponseDto,
+    VentaProducto, 
+    VentaProductoSingularExample 
+  )
+  async addProduct(@Body() body: { idVenta: number; idProducto: number; cantidad: number }) {
+    const productoAgregado = await this.ventaProductoService.addProductToSale(
       body.idVenta,
       body.idProducto,
       body.cantidad,
@@ -53,20 +53,13 @@ export class VentaProductoController {
    * @returns Lista de productos relacionados con la venta.
    */
   @Get(':idVenta')
-   // Usamos el decorador generalizado y añadimos el parámetro específico
-   @DefaultFindAllDoc(
-     'VentaProducto', 
-     VentaProducto, 
-     VentaProductoArrayExample
-   )
-   @ApiParam({
-     name: 'idVenta',
-     description: 'ID numérico de la venta cuyos productos se desean listar',
-     type: Number,
-     example: 1
-   })
-  async listar(@Param('idVenta') idVenta: number) {
-    const data = await this.ventaProductoService.listarPorVenta(idVenta);
+  @DefaultFindAllDoc(
+    'VentaProducto', 
+    VentaProducto, 
+    VentaProductoArrayExample
+  )
+  async listProducts(@Param('idVenta') idVenta: number) {
+    const data = await this.ventaProductoService.findBySale(idVenta);
     return {
       status: HttpStatus.OK,
       data,
@@ -82,13 +75,13 @@ export class VentaProductoController {
   @Delete(':id')
   @DefaultDeleteDoc('VentaProducto')
   @ApiParam({
-     name: 'id',
+    name: 'id',
     description: 'ID numérico del registro VentaProducto a eliminar',
     type: Number,
     example: 1
   })
-  async eliminar(@Param('id') id: number) {
-    await this.ventaProductoService.eliminar(id);
+  async remove(@Param('id') id: number) {
+    await this.ventaProductoService.remove(id);
     return {
       status: HttpStatus.OK,
       data: null,
