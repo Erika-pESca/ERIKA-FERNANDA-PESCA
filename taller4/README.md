@@ -1,98 +1,133 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+#  Taller 4 - Mujeres Digitales  
+### Proyecto Backend con NestJS, TypeORM, Swagger y Compodoc
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 👩‍💻 Integrantes del equipo
 
-## Description
+- **Erika Fernanda Pesca**  
+- **Carol Dayana Serrano**  
+- **Yesica Patricia Sierra**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🫡 Descripción general del proyecto
 
-## Project setup
+El **Sistema de Inventario de una Ferretería** es una aplicación web desarrollada con **NestJS** que permite gestionar de forma eficiente el control de productos, entradas, salidas, ventas y proveedores.  
+
+Su propósito principal es **facilitar la administración del inventario y optimizar la organización interna** de la ferretería mediante una interfaz clara y un backend sólido y seguro.
+
+Este proyecto forma parte del **curso Mujeres Digitales**, dentro del **Taller 4**, y aplica buenas prácticas de desarrollo backend, documentación con **Swagger y Compodoc**, autenticación con **JWT**, y pruebas unitarias con **Jest**.
+
+---
+
+### 👌 Objetivo general
+
+Desarrollar un **sistema de inventario** que permita el control de existencias y movimientos de productos en una ferretería, garantizando integridad y eficiencia en la gestión de datos.
+
+---
+
+### 🎯 Objetivos específicos
+
+- Registrar productos, categorías y proveedores.  
+- Actualizar el **stock en tiempo real**.  
+- Generar **reportes de ventas y existencias**.  
+- Controlar el ingreso de usuarios con **roles definidos** para cada nivel de acceso.  
+
+
+## ⚙️ Stack Tecnológico
+
+| Tecnología | Descripción |
+|-------------|-------------|
+| **NestJS** | Framework principal para el backend. |
+| **TypeORM** | ORM para manejar la base de datos PostgreSQL. |
+| **PostgreSQL** | Base de datos relacional usada en el proyecto. |
+| **Swagger** | Documentación interactiva de la API. |
+| **Compodoc** | Documentación técnica del código fuente. |
+| **JWT & Passport** | Autenticación basada en tokens. |
+| **Jest** | Framework de testing para controladores y servicios. |
+
+## 🚀 Instalación
+
+1. Clonar el repositorio:
+   ```bash
+   git clone <url-del-repositorio>
+   ```
+2. Acceder al directorio:
+   ```bash
+   cd taller4
+   ```
+3. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+4. Crear archivo `.env` con las variables:
+   ```env
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
+   DATABASE_USER=postgres
+   DATABASE_PASSWORD=admin
+   DATABASE_NAME=taller4
+   JWT_SECRET=secreto123
+   ```
+5. Ejecutar en modo desarrollo:
+   ```bash
+   npm run start:dev
+   ```
+
+## 📜 Documentación de la API (Swagger)
+
+Una vez levantado el servidor, ingresar a:
+
+👉 **http://localhost:3000/api**
+
+Allí encontrarás todas las rutas documentadas con sus tipos, ejemplos y respuestas.
+
+## 🧭 Documentación del código (Compodoc)
+
+Para generar la documentación técnica del código:
 
 ```bash
-$ npm install
+npm run doc
 ```
 
-## Compile and run the project
+Se abrirá automáticamente en:
 
+👉 **http://localhost:3001**
+
+📄 Incluye más de 10 archivos documentados al 100%.
+
+## 🧪 Testing
+
+El proyecto incluye pruebas unitarias para **controladores**, **servicios** y **guards**.
+
+Ejecuta los tests con:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run test
 ```
+## 🖥️ Metodología de trabajo
 
-## Run tests
+Durante el desarrollo del proyecto se aplicó la **metodología ágil Scrum y github**, dividiendo el trabajo en **sprints** y gestionando las tareas mediante tableros colaborativos.
 
-```bash
-# unit tests
-$ npm run test
+Esta metodología permitió organizar roles, distribuir tareas y cumplir con los objetivos de manera eficiente.
 
-# e2e tests
-$ npm run test:e2e
+🔗 **Enlace a la evidencia de trabajo Scrum:**  
+[https://trello.com/invite/b/690172322297b42e9235ee47/ATTI03506923c8b4720da337f7ca2dbe689fBE3F244D/mi-tablero-de-trello](https://trello.com/invite/b/690172322297b42e9235ee47/ATTI03506923c8b4720da337f7ca2dbe689fBE3F244D/mi-tablero-de-trello) 
 
-# test coverage
-$ npm run test:cov
-```
+## 🧰 Cómo aportar al proyecto
 
-## Deployment
+1. Crea una nueva rama:
+   ```bash
+   git checkout -b feature/nueva-funcionalidad
+   ```
+2. Realiza tus cambios y ejecuta los tests.
+3. Envía un Pull Request con la descripción de los cambios.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Roles del equipo
+- **Erika Fernanda Pesca** → Coordinación general y documentación.  
+- **Carol Dayana Serrano** → Implementación de controladores y servicios.  
+- **Yesica Patricia Sierra** → Pruebas unitarias y documentación técnica.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 👩‍🏫 Autoría
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Proyecto desarrollado en el marco del programa **Mujeres Digitales**  
+ Año: **2025**
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
