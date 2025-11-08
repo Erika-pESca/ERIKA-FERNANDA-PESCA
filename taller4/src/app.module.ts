@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // Importa primero los módulos que NO dependen de otros
 import { CategoriaModule } from './categoria/categoria.module';
@@ -9,23 +10,28 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { FacturacionModule } from './facturacion/facturacion.module';
 import { VentasModule } from './ventas/ventas.module';
 import { VentaProductoModule } from './venta_producto/venta_producto.module';
-import { AuthModule } from './auth/auth.module'; // Módulo de autenticación (JWT, bcrypt)
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    // Conexión a la base de datos PostgreSQL
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '250622', //'250622',
-      database: 'ferreteria',
-      autoLoadEntities: true, // Detecta automáticamente las entidades
-      synchronize: true, // Solo en desarrollo, elimina y recrea tablas
+    ConfigModule.forRoot({ isGlobal: true }), // Carga variables de entorno globalmente
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get<string>('DATABASE_HOST', 'localhost'),
+        port: config.get<number>('DATABASE_PORT', 5432),
+        username: config.get<string>('DATABASE_USER', 'postgres'),
+        password: config.get<string>('DATABASE_PASSWORD', '250622'),
+        database: config.get<string>('DATABASE_NAME', 'ferreteria'),
+        autoLoadEntities: true,
+        synchronize: true, // Solo para desarrollo
+      }),
     }),
 
-    //  Módulos de la aplicación
+    // Módulos de la aplicación
     CategoriaModule,
     ProveedorModule,
     ProductoModule,
