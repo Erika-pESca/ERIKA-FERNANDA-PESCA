@@ -20,14 +20,14 @@ export class ProductoService {
     private readonly categoriaRepository: Repository<Categoria>,
   ) {}
 
-  // 🔹 Obtener todos los productos
+  //  Obtener todos los productos
   async findAll(): Promise<Producto[]> {
     return this.productoRepository.find({
       relations: ['proveedor', 'categoria'], // carga relaciones
     });
   }
 
-  // 🔹 Obtener un producto por ID
+  // Obtener un producto por ID
   async findOne(id: number): Promise<Producto> {
     const producto = await this.productoRepository.findOne({
       where: { id_producto: id },
@@ -41,7 +41,7 @@ export class ProductoService {
     return producto;
   }
 
-  // 🔹 Crear producto
+  // Crear producto
   async create(dto: CreateProductoDto): Promise<Producto> {
     const { proveedorId, categoriaId, ...data } = dto;
 
@@ -65,8 +65,8 @@ export class ProductoService {
     return this.productoRepository.save(nuevoProducto);
   }
 
-  // 🔹 Actualizar producto
-  // 🔹 Actualizar producto
+  //  Actualizar producto
+  //  Actualizar producto
   async update(id: number, dto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.productoRepository.findOne({
       where: { id_producto: id },
@@ -103,7 +103,7 @@ export class ProductoService {
     return this.productoRepository.save(producto);
   }
 
-  // 🔹 Eliminar producto
+  // Eliminar producto
   async remove(id: number): Promise<void> {
     const producto = await this.productoRepository.findOne({
       where: { id_producto: id },

@@ -11,39 +11,43 @@ import { Facturacion } from '../facturacion/facturacion.entity';
 
 @Entity('usuario')
 export class Usuario {
-  // define la columna de id de usuario como clave primaria
+  // 🔹 Clave primaria
   @PrimaryGeneratedColumn()
   id_usuario: number;
 
-  @Column({ length: 100 }) // define el tamaño máximo de 100 caracteres para el nombre
+  // 🔹 Nombre del usuario
+  @Column({ length: 100 })
   nombre: string;
 
-  @Column({ unique: true, length: 150 }) // unique asegura que no hay dos usuarios con el mismo correo
+  // 🔹 Apellido opcional (soluciona el error de valores null)
+  @Column({ length: 100, nullable: true })
+  apellido?: string;
+
+  // 🔹 Correo único
+  @Column({ unique: true, length: 150 })
   correo: string;
 
-  @Column({ length: 200 }) // alamacena el hash de la contraseña
+  // 🔹 Contraseña (hash)
+  @Column({ length: 200 })
   contrasena: string;
 
-  @Column({ default: 'empleado' }) // columna rol con un valor por defecto
+  // 🔹 Rol del usuario (por defecto "empleado")
+  @Column({ default: 'empleado' })
   rol: string;
 
-  // Relaciones
+  // 🔹 Relación: un usuario puede tener muchas ventas
   @OneToMany(() => Ventas, (venta) => venta.usuario, { nullable: true })
   ventas?: Ventas[];
-  // RELACIÓN UNO A MUCHOS: Un Usuario puede tener MUCHAS Ventas.
-  // 1. () => Ventas: Define la entidad relacionada.
-  // 2. (venta) => venta.usuario: Define la propiedad en la entidad Ventas que mapea de vuelta a Usuario.
-  // 3. nullable: true: Indica que, aunque una venta requiere un usuario, el lado del array puede estar vacío.
-  //'ventas?: Ventas[]' es la propiedad que contendrá el array de ventas si se carga la relación.
 
-  @OneToMany(() => Facturacion, (factura) => factura.usuario, {
-    nullable: true,
-  })
-  facturas?: Facturacion[]; // indican que es un array de entidades opcional
+  // 🔹 Relación: un usuario puede tener muchas facturas
+  @OneToMany(() => Facturacion, (factura) => factura.usuario, { nullable: true })
+  facturas?: Facturacion[];
 
+  // 🔹 Fecha de última actualización
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
+  // 🔹 Fecha de eliminación lógica (soft delete)
+  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  deletedAt?: Date | null;
 }

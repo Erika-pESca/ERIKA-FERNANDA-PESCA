@@ -1,26 +1,11 @@
-// Importa el decorador @Module, que define un módulo en NestJS.
 import { Module } from '@nestjs/common';
-
-// Importa TypeOrmModule, que permite usar repositorios con entidades.
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// Importa la entidad de ventas (representa la tabla ventas en la base de datos).
 import { Ventas } from './ventas.entity';
-
-// Importa el servicio de ventas (contiene la lógica de negocio).
 import { VentasService } from './ventas.service';
-
-// Importa el controlador que maneja las rutas HTTP de ventas.
 import { VentasController } from './ventas.controller';
-
-// Importa el repositorio personalizado de ventas (para manejar consultas avanzadas).
 import { VentasRepository } from '../usuario/providers/ventas.repository';
-
-// Importa las entidades relacionadas.
 import { Usuario } from '../usuario/usuario.entity';
 import { Facturacion } from '../facturacion/facturacion.entity';
-
-// Importa el módulo de facturación para poder acceder a su servicio y repositorio exportados.
 import { FacturacionModule } from '../facturacion/facturacion.module';
 
 /**

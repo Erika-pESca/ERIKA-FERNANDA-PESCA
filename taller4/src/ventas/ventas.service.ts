@@ -40,10 +40,10 @@ export class VentasService {
    * Crea una nueva venta en el sistema y genera automáticamente su facturación asociada.
    *
    * Flujo:
-   * 1️⃣ Busca al usuario por su ID.
-   * 2️⃣ Crea una nueva venta vinculada al usuario.
-   * 3️⃣ Genera una factura asociada con la venta.
-   * 4️⃣ Devuelve la venta con sus relaciones cargadas.
+   * 1 Busca al usuario por su ID.
+   * 2 Crea una nueva venta vinculada al usuario.
+   * 3 Genera una factura asociada con la venta.
+   * 4 Devuelve la venta con sus relaciones cargadas.
    *
    * @async
    * @param data Objeto que contiene el total y el ID del usuario.

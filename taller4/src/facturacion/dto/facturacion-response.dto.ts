@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { MetodoPago } from '../enums/metodo-pago.enum';
 
+
 // DTO con información mínima del usuario relacionada con la factura
 class UsuarioMinResponseDto {
   @ApiProperty({ example: 5 })
@@ -35,11 +36,11 @@ export class FacturacionResponseDto {
   @ApiProperty({ example: '2025-11-05T15:30:00.000Z' })
   fecha_emision: Date;
 
-  // Relación con la venta correspondiente
-  @ApiProperty({ type: VentaMinResponseDto, nullable: true })
-  venta: VentaMinResponseDto;
+    // Relación con la venta correspondiente 
+    @ApiProperty({ type: VentaMinResponseDto, nullable: true })
+    venta: VentaMinResponseDto;
 
-  // Relación con el usuario que generó la factura
-  @ApiProperty({ type: UsuarioMinResponseDto, nullable: true })
-  usuario: UsuarioMinResponseDto;
+    // Relación con el usuario que generó la factura
+    @ApiProperty({ type: UsuarioMinResponseDto, nullable: true })
+    usuario: UsuarioMinResponseDto;
 }
