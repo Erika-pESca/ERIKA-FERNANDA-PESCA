@@ -23,9 +23,9 @@ export class Facturacion {
 
   //Esta relación es la DUEÑA del OneToOne
   @OneToOne(() => Ventas, (venta) => venta.facturacion, {
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-})
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'id_venta' }) // Este lado mantiene la FK
   venta: Ventas;
 
@@ -33,7 +33,6 @@ export class Facturacion {
     onDelete: 'SET NULL',
     nullable: true,
   })
-
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 }

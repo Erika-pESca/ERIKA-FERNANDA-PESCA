@@ -110,25 +110,17 @@ describe('VentaProductoService', () => {
   describe('agregarProductoAVenta', () => {
     it('lanza NotFoundException si la venta no existe', async () => {
       ventaRepo.findOne!.mockResolvedValue(null);
-<<<<<<< HEAD
-      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(new NotFoundException('Venta no encontrada'));
-=======
-      await expect(service.agregarProductoAVenta(1, 1, 1)).rejects.toThrow(
+      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(
         new NotFoundException('Venta no encontrada'),
       );
->>>>>>> 55e99079 (Guardo cambios locales antes del rebase)
     });
 
     it('lanza NotFoundException si el producto no existe', async () => {
       ventaRepo.findOne!.mockResolvedValue(ventaMock);
       productoRepo.findOne!.mockResolvedValue(null);
-<<<<<<< HEAD
-      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(new NotFoundException('Producto no encontrado'));
-=======
-      await expect(service.agregarProductoAVenta(1, 1, 1)).rejects.toThrow(
+      await expect(service.addProductToSale(1, 1, 1)).rejects.toThrow(
         new NotFoundException('Producto no encontrado'),
       );
->>>>>>> 55e99079 (Guardo cambios locales antes del rebase)
     });
 
     it('lanza NotFoundException si la cantidad supera el stock', async () => {
@@ -167,13 +159,9 @@ describe('VentaProductoService', () => {
   describe('eliminar', () => {
     it('lanza NotFoundException si el registro no existe', async () => {
       ventaProductoRepo.findOne!.mockResolvedValue(null);
-<<<<<<< HEAD
-      await expect(service.remove(1)).rejects.toThrow(new NotFoundException('Registro no encontrado'));
-=======
-      await expect(service.eliminar(1)).rejects.toThrow(
+      await expect(service.remove(1)).rejects.toThrow(
         new NotFoundException('Registro no encontrado'),
       );
->>>>>>> 55e99079 (Guardo cambios locales antes del rebase)
     });
 
     it('elimina el registro si existe', async () => {

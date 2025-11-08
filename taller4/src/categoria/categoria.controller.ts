@@ -16,12 +16,18 @@ import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { ApiDefaultResponses } from '../common/decorators/ApiDefaultResponses';
-import { DefaultResponse, DefaultSuccessResponse } from '../common/interfaces/IResponse';
-import { Categoria } from './categoria.entity'; 
+import {
+  DefaultResponse,
+  DefaultSuccessResponse,
+} from '../common/interfaces/IResponse';
+import { Categoria } from './categoria.entity';
 import { DefaultCreateDoc } from '../common/decorators/DefaultCreateDoc';
 import { DefaultFindAllDoc } from '../common/decorators/DefaultFindAllDoc';
 import { DefaultFindOneDoc } from '../common/decorators/DefaultFindOneDoc';
-import {CategoriaSingularExample, CategoriaArrayExample} from './docs/CategoriaExample'
+import {
+  CategoriaSingularExample,
+  CategoriaArrayExample,
+} from './docs/CategoriaExample';
 import { DefaultUpdateDoc } from '../common/decorators/DefaultUpdateDoc';
 import { DefaultDeleteDoc } from '../common/decorators/DefaultDeleteDoc';
 

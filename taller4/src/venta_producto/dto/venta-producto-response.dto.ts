@@ -25,17 +25,16 @@ class ProductoMinResponseDto {
  * Representa el detalle de los productos vendidos dentro de una venta.
  */
 export class VentaProductoResponseDto {
-
   @ApiProperty({ example: 1 })
   id_venta_producto: number;
 
   @ApiProperty({ example: 3 })
   cantidad: number;
 
-  @ApiProperty({ example: 10000.00 })
+  @ApiProperty({ example: 10000.0 })
   precio_unitario: number;
 
-  @ApiProperty({ example: 30000.00 })
+  @ApiProperty({ example: 30000.0 })
   subtotal: number;
 
   @ApiProperty({ type: VentaMinResponseDto })

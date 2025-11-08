@@ -37,14 +37,16 @@ export class VentaProductoController {
    * @returns Confirmación del producto agregado a la venta.
    */
   @Post()
-  @UsePipes(new ValidationPipe({ transform: true })) 
+  @UsePipes(new ValidationPipe({ transform: true }))
   @DefaultCreateDoc(
-    'VentaProducto', 
+    'VentaProducto',
     VentaProductoResponseDto,
-    VentaProducto, 
-    VentaProductoSingularExample 
+    VentaProducto,
+    VentaProductoSingularExample,
   )
-  async addProduct(@Body() body: { idVenta: number; idProducto: number; cantidad: number }) {
+  async addProduct(
+    @Body() body: { idVenta: number; idProducto: number; cantidad: number },
+  ) {
     const productoAgregado = await this.ventaProductoService.addProductToSale(
       body.idVenta,
       body.idProducto,
@@ -64,11 +66,7 @@ export class VentaProductoController {
    * @returns Lista de productos relacionados con la venta.
    */
   @Get(':idVenta')
-  @DefaultFindAllDoc(
-    'VentaProducto', 
-    VentaProducto, 
-    VentaProductoArrayExample
-  )
+  @DefaultFindAllDoc('VentaProducto', VentaProducto, VentaProductoArrayExample)
   async listProducts(@Param('idVenta') idVenta: number) {
     const data = await this.ventaProductoService.findBySale(idVenta);
     return {

@@ -98,10 +98,15 @@ describe('VentasController', () => {
   describe('deleteVenta', () => {
     it('debería eliminar una venta y devolver el resultado', async () => {
       const ventaId = 1;
-      (service.deleteVenta as jest.Mock).mockResolvedValue({ affected: 1, raw: [] }); // Mock the service to return a DeleteResult
+      (service.deleteVenta as jest.Mock).mockResolvedValue({
+        affected: 1,
+        raw: [],
+      }); // Mock the service to return a DeleteResult
 
       const result = await controller.delete(ventaId);
-      expect(result).toEqual({ message: `Venta ${ventaId} eliminada correctamente` }); // Expect the controller's custom message
+      expect(result).toEqual({
+        message: `Venta ${ventaId} eliminada correctamente`,
+      }); // Expect the controller's custom message
       expect(service.deleteVenta).toHaveBeenCalledWith(ventaId);
     });
   });

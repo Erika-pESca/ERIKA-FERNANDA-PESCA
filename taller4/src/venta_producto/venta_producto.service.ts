@@ -27,7 +27,7 @@ export class VentaProductoService {
    * Agrega un producto a una venta específica.
    * Valida que la venta y el producto existan, y que haya suficiente stock.
    * Luego crea el registro en la tabla intermedia venta_producto y actualiza el stock del producto.
-   * 
+   *
    * @param saleId - ID de la venta
    * @param productId - ID del producto
    * @param quantity - Cantidad de productos a agregar
@@ -38,11 +38,15 @@ export class VentaProductoService {
     const sale = await this.saleRepo.findOne({ where: { id_venta: saleId } });
     if (!sale) throw new NotFoundException('Venta no encontrada');
 
-    const product = await this.productRepo.findOne({ where: { id_producto: productId } });
+    const product = await this.productRepo.findOne({
+      where: { id_producto: productId },
+    });
     if (!product) throw new NotFoundException('Producto no encontrado');
 
     if (quantity > product.stock) {
-      throw new NotFoundException(`Stock insuficiente. Disponible: ${product.stock}`);
+      throw new NotFoundException(
+        `Stock insuficiente. Disponible: ${product.stock}`,
+      );
     }
 
     // Calcular subtotal
@@ -68,7 +72,7 @@ export class VentaProductoService {
   /**
    * Lista todos los productos asociados a una venta específica.
    * Incluye relaciones con la entidad producto y venta.
-   * 
+   *
    * @param saleId - ID de la venta
    * @returns Lista de productos vinculados a la venta
    */
@@ -81,13 +85,15 @@ export class VentaProductoService {
 
   /**
    * Elimina un registro de venta-producto por su ID.
-   * 
+   *
    * @param id - ID del registro venta-producto
    * @returns Resultado de la operación de eliminación
    * @throws NotFoundException si el registro no existe
    */
   async remove(id: number) {
-    const existingRecord = await this.saleProductRepo.findOne({ where: { id_venta_producto: id } });
+    const existingRecord = await this.saleProductRepo.findOne({
+      where: { id_venta_producto: id },
+    });
     if (!existingRecord) throw new NotFoundException('Registro no encontrado');
     return await this.saleProductRepo.delete(id);
   }

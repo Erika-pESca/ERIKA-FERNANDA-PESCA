@@ -8,14 +8,14 @@ import { UpdateFacturacionDto } from './dto/update-facturacion.dto';
 /**
  * Servicio encargado de manejar la lógica de negocio relacionada con las facturas.
  * Este servicio permite crear, obtener, actualizar y eliminar registros de facturación.
- * 
+ *
  * @module FacturacionService
  */
 @Injectable()
 export class FacturacionService {
   /**
    * Inyecta el repositorio de la entidad `Facturacion` para interactuar con la base de datos.
-   * 
+   *
    * @param repo - Repositorio de TypeORM para la entidad `Facturacion`.
    */
   constructor(
@@ -25,7 +25,7 @@ export class FacturacionService {
 
   /**
    * Crea una nueva factura en la base de datos.
-   * 
+   *
    * @param dto - Objeto que contiene los datos necesarios para crear una factura.
    * @returns La factura recién creada.
    */
@@ -36,7 +36,7 @@ export class FacturacionService {
 
   /**
    * Obtiene todas las facturas almacenadas en la base de datos.
-   * 
+   *
    * @returns Una lista de todas las facturas con su relación `venta`.
    */
   findAll() {
@@ -45,7 +45,7 @@ export class FacturacionService {
 
   /**
    * Busca una factura específica por su identificador.
-   * 
+   *
    * @param id - Identificador de la factura a buscar.
    * @returns La factura encontrada.
    * @throws {NotFoundException} Si la factura no existe.
@@ -61,7 +61,7 @@ export class FacturacionService {
 
   /**
    * Actualiza una factura existente.
-   * 
+   *
    * @param id - Identificador de la factura a actualizar.
    * @param dto - Datos nuevos que reemplazarán los anteriores.
    * @returns La factura actualizada.
@@ -74,7 +74,7 @@ export class FacturacionService {
 
   /**
    * Elimina una factura de la base de datos.
-   * 
+   *
    * @param id - Identificador de la factura a eliminar.
    * @returns La factura eliminada.
    */

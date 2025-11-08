@@ -1,4 +1,3 @@
-
 /*
 Ejemplos de datos usados en la documentación Swagger para mostrar cómo luce una venta_producto (singular y en lista)
 */
