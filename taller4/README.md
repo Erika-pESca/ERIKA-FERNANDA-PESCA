@@ -121,9 +121,9 @@ Esta metodología permitió organizar roles, distribuir tareas y cumplir con los
 3. Envía un Pull Request con la descripción de los cambios.
 
 ### Roles del equipo
-- **Erika Fernanda Pesca** → Coordinación general y documentación.  
-- **Carol Dayana Serrano** → Implementación de controladores y servicios.  
-- **Yesica Patricia Sierra** → Pruebas unitarias y documentación técnica.
+**Erika Fernanda Pesca** → implementacion de documentación del proyecto y desarrollo de pruebas unitarias.  
+- **Carol Dayana Serrano** → Implementación de controladores y servicios, apoyo en pruebas y documentación técnica.  
+- **Yesica Patricia Sierra** → Elaboración del archivo **README.md** 
 
 ## 👩‍🏫 Autoría
 
