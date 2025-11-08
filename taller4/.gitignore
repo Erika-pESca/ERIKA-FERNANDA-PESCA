@@ -11,9 +11,7 @@ build/
 # Archivos de lock
 package-lock.json
 
-# Entorno
-.env
-.env.*.local
+
 
 # Sistema operativo y temporales
 .DS_Store
